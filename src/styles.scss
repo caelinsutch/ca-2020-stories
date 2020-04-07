@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@import "~bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$custom-orange: (
+  50: #fff3e0,
+  100: #ffe0b2,
+  200: #ffcc80,
+  300: #ffb74d,
+  400: #ffa726,
+  500: #ff9800,
+  600: #fb8c00,
+  700: #f57c00,
+  800: #ef6c00,
+  900: #e65100,
+  A100: #ffd180,
+  A200: #ffab40,
+  A400: #ff9100,
+  A700: #ff6d00,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: white,
+  )
+);
+
+$ca2020-primary: mat-palette($custom-orange);
+$ca2020-accent: mat-palette($mat-blue, A200, A100, A400);
+
+$ca2020-warn: mat-palette($mat-red);
+
+$ca2020-theme: mat-light-theme($ca2020-primary, $ca2020-accent, $ca2020-warn);
+
+@include angular-material-theme($ca2020-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif; }
