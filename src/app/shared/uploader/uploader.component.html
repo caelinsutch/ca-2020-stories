@@ -1,0 +1,10 @@
+<label for="file">Upload a verification photo</label>
+<input type="file" id="file" class="inputfile" (change)="onUpload($event)">
+
+<h3>Uploads</h3>
+
+<div *ngIf="downloadURL as url">
+  <h3>Results!</h3>
+  <img [src]="url"><br>
+  <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+</div>

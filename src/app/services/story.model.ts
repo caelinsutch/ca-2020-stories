@@ -5,4 +5,5 @@ export interface Story {
   image?: string;
   story?: string;
   reviewed?: boolean;
+  author?: string;
 }

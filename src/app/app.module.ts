@@ -10,10 +10,12 @@ import {SharedModule} from './shared/shared.module';
 import {AngularFireAnalyticsModule} from '@angular/fire/analytics';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {HomePageComponent} from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
