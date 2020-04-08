@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Subscriber, Subscription} from 'rxjs';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import { Subscription} from 'rxjs';
 import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
@@ -14,6 +14,7 @@ export class UploaderComponent implements OnDestroy{
   @Output() url: EventEmitter<string> = new EventEmitter<string>();
   downloadURL: string;
   sub: Subscription;
+  uploading = false;
 
   constructor(private afStorage: AngularFireStorage) { }
 
@@ -25,8 +26,10 @@ export class UploaderComponent implements OnDestroy{
 
 
   async onUpload(event) {
+    this.uploading = true;
     await this.afStorage.upload(this.fileLocation + '/' + this.fileName ?? '-' + '/' + Date.now(), event.target.files[0]);
     this.sub = this.afStorage.ref(this.fileLocation + '/' + this.fileName).getDownloadURL().subscribe(v => {
+      this.uploading = false;
       this.downloadURL = v;
       this.url.emit(this.downloadURL);
     });

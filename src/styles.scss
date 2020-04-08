@@ -10,35 +10,35 @@
 @include mat-core();
 
 $custom-orange: (
-  50: #fff3e0,
-  100: #ffe0b2,
-  200: #ffcc80,
-  300: #ffb74d,
-  400: #ffa726,
-  500: #ff9800,
-  600: #fb8c00,
-  700: #f57c00,
-  800: #ef6c00,
-  900: #e65100,
-  A100: #ffd180,
-  A200: #ffab40,
-  A400: #ff9100,
-  A700: #ff6d00,
+  50 : #efe7fa,
+  100 : #d6c2f2,
+  200 : #bb9aea,
+  300 : #9f72e1,
+  400 : #8b53da,
+  500 : #7635d4,
+  600 : #6e30cf,
+  700 : #6328c9,
+  800 : #5922c3,
+  900 : #4616b9,
+  A100 : #f1ebff,
+  A200 : #cbb8ff,
+  A400 : #a585ff,
+  A700 : #926cff,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: white,
-    900: white,
-    A100: $black-87-opacity,
-    A200: $black-87-opacity,
-    A400: $black-87-opacity,
-    A700: white,
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
   )
 );
 
@@ -56,3 +56,17 @@ $ca2020-theme: mat-light-theme($ca2020-primary, $ca2020-accent, $ca2020-warn);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif; }
+
+.gradient-button {
+  background: linear-gradient(115.06deg, #6D11AE -1.78%, #012762 96.6%);
+  box-shadow: 0 14px 34px rgba(71, 24, 148, 0.37);
+  border-radius: 33px;
+  padding: 20px;
+  text-transform: uppercase;
+  color: white !important;
+  font-weight: bold;
+
+  &:hover {
+    box-shadow: 0 20px 45px rgba(71, 24, 148, 0.7);
+  }
+}

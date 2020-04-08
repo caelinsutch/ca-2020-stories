@@ -1,10 +1,17 @@
-<label for="file">Upload a verification photo</label>
-<input type="file" id="file" class="inputfile" (change)="onUpload($event)">
+<div>
+  <label for="file"
+          *ngIf="!uploading || downloadURL === null">Upload</label>
+  <input type="file" id="file" class="inputfile" (change)="onUpload($event)">
 
-<h3>Uploads</h3>
+  <div class="uploading text-center" *ngIf="uploading">
+    <mat-spinner diameter="30" class="mx-auto"></mat-spinner>
+    <p>Uploading....</p>
+  </div>
 
-<div *ngIf="downloadURL as url">
-  <h3>Results!</h3>
-  <img [src]="url"><br>
-  <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+
+  <div *ngIf="downloadURL as url">
+    <h3>Preview</h3>
+    <img [src]="url" alt="uploaded photo"><br>
+    <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+  </div>
 </div>
