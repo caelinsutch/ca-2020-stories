@@ -21,18 +21,25 @@
               </mat-error>
             </mat-form-field>
 
+            <mat-label>Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>
+            </mat-label>
             <mat-form-field [color]="story.valid && 'accent'">
             <textarea
               matInput
               formControlName="story"
               type="string"
-              placeholder="Story"
+              placeholder="Story (supports markdown)"
             ></textarea>
 
               <mat-error *ngIf="story.invalid && story.dirty">
                 Story is required
               </mat-error>
             </mat-form-field>
+
+            <h3>Preview of Markdown</h3>
+            <markdown [data]="story.value" class="text-left">
+
+            </markdown>
 
             <div class="p-3">
               <h4>Upload a photo of yourself or something relating to your story!</h4>
