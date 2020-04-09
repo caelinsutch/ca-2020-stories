@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
-import UserCredential = firebase.auth.UserCredential;
 import {User} from './user.model';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,11 @@ export class UserService {
   getCurrentUser(): Observable<User> {
     return this.afAuth.user.pipe(
       switchMap(user => {
-        return this.db.collection<User>(environment.database.users).doc(user.uid).valueChanges();
+        if (user) {
+          return this.db.collection<User>(environment.database.users).doc(user.uid).valueChanges();
+        } else {
+          return of(undefined);
+        }
       })
     );
   }
