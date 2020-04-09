@@ -5,10 +5,11 @@ import { StoriesRoutingModule } from './stories-routing.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {StoryPageComponent} from './story-page/story-page.component';
 import {SharedModule} from '../shared/shared.module';
+import {NewStoryPageComponent} from './new-story-page/new-story-page.component';
 
 
 @NgModule({
-  declarations: [StoryPageComponent],
+  declarations: [StoryPageComponent, NewStoryPageComponent],
   imports: [
     CommonModule,
     StoriesRoutingModule,

@@ -39,11 +39,13 @@ export class EmailLoginComponent implements OnInit {
   changeType(val: 'login' | 'signup' | 'reset') {
     this.type = val;
     if (this.isSignup) {
+      this.imageAdded = false;
       this.form.get('zipCode').setValidators([Validators.required]);
       this.form.get('zipCode').updateValueAndValidity();
       this.form.get('name').setValidators([Validators.required]);
       this.form.get('name').updateValueAndValidity();
     } else {
+      this.imageAdded = true;
       this.form.get('zipCode').clearValidators();
       this.form.get('zipCode').updateValueAndValidity();
       this.form.get('name').clearValidators();

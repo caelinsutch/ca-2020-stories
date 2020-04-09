@@ -1,6 +1,8 @@
 <div>
   <label for="file"
-          *ngIf="!uploading || downloadURL === null">Upload</label>
+          *ngIf="!uploading || downloadURL === null">
+    <mat-icon color="white" inline="true" class="p-1">cloud_upload</mat-icon>
+    Upload</label>
   <input type="file" id="file" class="inputfile" (change)="onUpload($event)">
 
   <div class="uploading text-center" *ngIf="uploading">

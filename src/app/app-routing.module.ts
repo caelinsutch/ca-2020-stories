@@ -10,8 +10,7 @@ const routes: Routes = [
     path: 'login', loadChildren: () => import('./user/user.module').then(m => m.UserModule )
   },
   {
-    path: 'stories', loadChildren: () => import('./stories/stories.module').then(m => m.StoriesModule),
-    canActivate: [AuthGuard],
+    path: 'stories', loadChildren: () => import('./stories/stories.module').then(m => m.StoriesModule)
   }
 ];
 

@@ -16,7 +16,7 @@ export const environment = {
   },
   database: {
     stories: 'stories-dev',
-    users: 'users-dev'
+    users: 'users'
   }
 };
 

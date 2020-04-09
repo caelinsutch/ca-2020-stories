@@ -19,7 +19,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.storySubscription = this.storyService.getReviewedBoards().subscribe( stories => {
+    this.storySubscription = this.storyService.getReviewedStories().subscribe(stories => {
       this.loading = false;
       this.stories = stories;
     });

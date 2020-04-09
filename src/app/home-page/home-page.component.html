@@ -17,9 +17,13 @@
   </section>
   <section class="container mt-5">
     <div class="row">
-      <ngx-skeleton-loader count="10" appearance="square"></ngx-skeleton-loader>
+      <mat-spinner
+        *ngIf="!stories"
+        diameter="100"
+        class="mx-auto"
+      ></mat-spinner>
       <div *ngFor="let story of stories" class="col-12 col-md-6 col-lg-4 mb-3 mb-lg-0 text-center">
-        <div class="hvrbox">
+        <div class="hvrbox" [routerLink]="['/stories', story.id]">
           <img [src]="story.image" alt="Story image">
           <div class="hvrbox-layer_top">
             <div class="hvrbox-text">

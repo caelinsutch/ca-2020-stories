@@ -13,14 +13,12 @@ export class AuthGuard implements CanActivate {
 
   constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
-  async canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Promise<boolean> {
-    const user = await this.afAuth.currentUser;
-    const isLoggedIn: boolean = !!user;
-    if (!isLoggedIn) {
-      this.router.navigateByUrl('login');
-    }
-    return isLoggedIn;
+  canActivate(): Observable<boolean> {
+    return this.afAuth.user.pipe(first()).pipe(map(user => {
+      if (user != null) {
+        return true;
+      }
+      this.router.navigate(['/login']);
+    })); // To make the observable complete after the first emission
   }
 }

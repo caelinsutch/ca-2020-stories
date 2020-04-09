@@ -28,6 +28,10 @@ export class UserService {
     });
   }
 
+  getUserById(id: string): Observable<User> {
+    return this.db.collection(environment.database.users).doc<User>(id).get() as Observable<User>;
+  }
+
   getCurrentUser(): Observable<User> {
     return this.afAuth.user.pipe(
       switchMap(user => {

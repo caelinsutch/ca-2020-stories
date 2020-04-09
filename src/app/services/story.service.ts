@@ -44,7 +44,13 @@ export class StoryService {
     return this.db.collection(environment.database.stories).doc(storyId).update({ data });
   }
 
-  getReviewedBoards(): Observable<Array<Story>> {
-    return this.db.collection<Story>(environment.database.stories, ref => ref.where('reviewed', '==', 'true')).valueChanges();
+  getStoryById(id: string): Observable<Story> {
+    return this.db.collection(environment.database.stories).doc(id).valueChanges();
+  }
+
+  getReviewedStories(): Observable<Story[]> {
+    return this.db.collection<Story>(environment.database.stories,
+        ref => ref.where('reviewed', '==', true))
+      .valueChanges({idField: 'id'});
   }
 }
