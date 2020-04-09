@@ -16,14 +16,22 @@ export class UserService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
-  ) { }
+  ) {
+  }
 
-  async createUser(email: string, password: string, displayName: string, verificationImage: string, zipCode: string): Promise<any> {
+  async createUser(
+    email: string,
+    password: string,
+    displayName: string,
+    verificationImage: string,
+    zipCode: string,
+    school: string): Promise<any> {
     const cred: UserCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
     await cred.user.updateProfile({displayName});
     return this.db.collection(environment.database.users).doc<User>(cred.user.uid).set({
       verificationImage,
       zipCode,
+      school,
       verified: false,
     });
   }

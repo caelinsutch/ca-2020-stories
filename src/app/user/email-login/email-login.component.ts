@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from '../user.service';
@@ -30,6 +30,7 @@ export class EmailLoginComponent implements OnInit {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       zipCode: ['', []],
+      school: ['', []],
       name: ['', []],
       password: ['', [Validators.minLength(6), Validators.required]],
       passwordConfirm: ['', []],
@@ -38,16 +39,21 @@ export class EmailLoginComponent implements OnInit {
 
   changeType(val: 'login' | 'signup' | 'reset') {
     this.type = val;
+    // Change validators on non essential form fields
     if (this.isSignup) {
       this.imageAdded = false;
       this.form.get('zipCode').setValidators([Validators.required]);
       this.form.get('zipCode').updateValueAndValidity();
+      this.form.get('school').setValidators([Validators.required]);
+      this.form.get('school').updateValueAndValidity();
       this.form.get('name').setValidators([Validators.required]);
       this.form.get('name').updateValueAndValidity();
     } else {
       this.imageAdded = true;
       this.form.get('zipCode').clearValidators();
       this.form.get('zipCode').updateValueAndValidity();
+      this.form.get('school').clearValidators();
+      this.form.get('school').updateValueAndValidity();
       this.form.get('name').clearValidators();
       this.form.get('name').updateValueAndValidity();
     }
@@ -73,9 +79,14 @@ export class EmailLoginComponent implements OnInit {
     return this.form.get('zipCode');
   }
 
+  get school() {
+    return this.form.get('school');
+  }
+
   get email() {
     return this.form.get('email');
   }
+
   get password() {
     return this.form.get('password');
   }
@@ -105,13 +116,14 @@ export class EmailLoginComponent implements OnInit {
     const password = this.password.value;
     const name = this.name.value;
     const zipCode = this.zipCode.value;
+    const school = this.school.value;
     if (this.imageAdded || !this.isSignup) {
       try {
         if (this.isLogin) {
           await this.authService.loginUser(email, password);
         }
         if (this.isSignup) {
-          await this.authService.createUser(email, password, name, this.imageUrl, zipCode);
+          await this.authService.createUser(email, password, name, this.imageUrl, zipCode, school);
         }
         if (this.isPasswordReset) {
           await this.afAuth.sendPasswordResetEmail(email);

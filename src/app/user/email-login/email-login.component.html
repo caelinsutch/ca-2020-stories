@@ -61,6 +61,19 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field [color]="school.valid && 'accent'" *ngIf="isSignup">
+      <input
+        matInput
+        formControlName="school"
+        placeholder="School"
+        autocomplete="on"
+      />
+
+      <mat-error *ngIf="school.invalid && school.dirty">
+        You must enter a school name
+      </mat-error>
+    </mat-form-field>
+
     <mat-form-field [color]="password.valid && 'accent'" *ngIf="!isPasswordReset">
       <input
         matInput
