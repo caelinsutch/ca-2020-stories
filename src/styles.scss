@@ -65,6 +65,7 @@ body { margin: 0; font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   color: white !important;
   font-weight: bold;
+  border: none;
 
   &:hover {
     box-shadow: 0 20px 45px rgba(71, 24, 148, 0.7);
@@ -109,4 +110,10 @@ mat-card {
 
 .rounded-40 {
   border-radius: 40px;
+}
+
+a:hover {
+  color: inherit;
+  font-weight: bold;
+  text-underline: none;
 }

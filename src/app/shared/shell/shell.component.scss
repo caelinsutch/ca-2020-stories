@@ -51,3 +51,9 @@ i {
   padding: 5px;
   max-height: 86px;
 }
+
+.gradient-text {
+  background: -webkit-linear-gradient(114.52deg, #6D11AE -1.78%, #012762 96.6%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

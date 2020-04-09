@@ -17,7 +17,7 @@ export class SeoService {
       // Open Graph
       {name: 'og:url', content: `https://${environment.url}${this.router.url}`},
       {name: 'og:title', content: title},
-      {name: 'og:stie_name', content: 'CA 2020'},
+      {name: 'og:site_name', content: 'CA 2020'},
       {name: 'og:type', content: type},
       {name: 'og:description', content: description},
       {name: 'og:image', content: image},
