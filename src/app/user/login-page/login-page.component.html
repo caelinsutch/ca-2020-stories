@@ -1,0 +1,25 @@
+<main class="container-fluid py-5">
+  <div class="row">
+    <div class="col-12 text-center">
+      <div *ngIf="!(afAuth.authState | async)">
+        <app-email-login></app-email-login>
+      </div>
+
+
+      <div *ngIf="afAuth.authState | async as user" class="logout">
+        <mat-card class="mat-elevation-z10">
+          <h1 class="font-weight-bold">Welcome {{ user.displayName}}!</h1>
+          <p>
+            Logged in as <strong>{{ user.email }}</strong>
+          </p>
+
+          <h3>Account Status</h3>
+          <p>Your account is {{(userService.getCurrentUser() | async)?.verified ? 'verified' : 'not yet verified' }} </p>
+          <button mat-raised-button color="primary" (click)="afAuth.signOut()">Sign Out</button>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+
+</main>
