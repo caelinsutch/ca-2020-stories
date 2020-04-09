@@ -1,30 +1,26 @@
 # Ca2020stories
-![CI](https://github.com/caelinsutch/ca-2020-stories/workflows/CI/badge.svg?event=deployment_status)
+
+![CI](https://github.com/caelinsutch/ca-2020-stories/workflows/CI/badge.svg)
+
+[![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/Naereen/)
+[![ForTheBadge uses-badges](http://ForTheBadge.com/images/badges/uses-badges.svg)](http://ForTheBadge.com)
+[![ForTheBadge powered-by-electricity](http://ForTheBadge.com/images/badges/powered-by-electricity.svg)](http://ForTheBadge.com)
+
 
 https://ca-2020.web.app/
 
-CA 2020 Web application. Built with Angular 9 and Angular Material. Uses a Firebase backend and Fireauth. Deployed via Firebase hosting.
+CA 2020 Web application. Built with Angular 9 and Angular Material. 
+Uses a Firebase backend and Fireauth. Deployed via Firebase hosting on Github CI.
+Released using `release-it`
 
-## Development server
+## Getting started with development
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ensure you have npm installed. Run `npm i -g @angular/cli` to install the latest version of the Angular CLI. Ensure you have git installed.
 
-## Code scaffolding
+Open a terminal window and run `git clone github.com/caelinsutch/ca-2020-stories` in your directory of choice to clone this repository.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng serve` in root for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Contributors
+Developed by:
+- [Caelin Sutch](caelinsutch.com) - Initial Work
