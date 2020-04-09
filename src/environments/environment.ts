@@ -13,6 +13,10 @@ export const environment = {
     messagingSenderId: '313637784831',
     appId: '1:313637784831:web:2b34d4960b1b03f54350ca',
     measurementId: 'G-7ZZDYVQT1N'
+  },
+  database: {
+    stories: 'stories-dev',
+    users: 'users-dev'
   }
 };
 

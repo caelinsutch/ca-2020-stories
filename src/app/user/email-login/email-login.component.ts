@@ -13,6 +13,7 @@ export class EmailLoginComponent implements OnInit {
   form: FormGroup;
   imageUrl: string;
   warnImage = false;
+  imageAdded = false;
 
   type: 'login' | 'signup' | 'reset' = 'signup';
   loading = false;
@@ -91,6 +92,7 @@ export class EmailLoginComponent implements OnInit {
 
   onUpload($event) {
     this.warnImage = false;
+    this.imageAdded = true;
     this.imageUrl = $event;
   }
 
@@ -101,7 +103,7 @@ export class EmailLoginComponent implements OnInit {
     const password = this.password.value;
     const name = this.name.value;
     const zipCode = this.zipCode.value;
-    if (this.warnImage !== undefined || !this.isSignup) {
+    if (this.imageAdded || !this.isSignup) {
       try {
         if (this.isLogin) {
           await this.authService.loginUser(email, password);

@@ -116,7 +116,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="form.invalid || !passwordDoesMatch || loading"
+      [disabled]="form.invalid || !passwordDoesMatch || loading || !imageAdded"
     >
       Submit
     </button>

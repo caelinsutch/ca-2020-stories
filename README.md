@@ -1,6 +1,9 @@
 # Ca2020stories
+![CI](https://github.com/caelinsutch/ca-2020-stories/workflows/CI/badge.svg?event=deployment_status)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0-rc.0.
+https://ca-2020.web.app/
+
+CA 2020 Web application. Built with Angular 9 and Angular Material. Uses a Firebase backend and Fireauth. Deployed via Firebase hosting.
 
 ## Development server
 

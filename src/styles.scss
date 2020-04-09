@@ -74,3 +74,15 @@ body { margin: 0; font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif;
 h1, h2, h3, h4, h5 {
   font-weight: bold !important;
 }
+
+.space-background {
+  background-image: url("~/assets/backgrounds.svg");
+  object-fit: cover;
+  width: 100%;
+  min-height: 100%;
+}
+
+.py-6 {
+  padding-bottom: 4rem;
+  padding-top: 4rem;
+}
