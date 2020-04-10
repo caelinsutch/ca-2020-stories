@@ -14,6 +14,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   storySubscription: Subscription;
   stories: Story[];
   loading = true;
+  searchText: string;
 
   constructor(
     public storyService: StoryService,

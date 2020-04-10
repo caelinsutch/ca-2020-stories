@@ -5,8 +5,8 @@ import {User} from './user.model';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import UserCredential = firebase.auth.UserCredential;
 import {Router} from '@angular/router';
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable({
   providedIn: 'root'
@@ -64,8 +64,8 @@ export class UserService {
   }
 
   async logout() {
-    return this.afAuth.signOut().then(
-      this.router.navigateByUrl('/')
-    )
+    return this.afAuth.signOut().then(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 }
