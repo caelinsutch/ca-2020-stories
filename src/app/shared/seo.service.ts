@@ -8,9 +8,14 @@ import {environment} from '../../environments/environment';
 })
 export class SeoService {
 
-  constructor(private title: Title, private meta: Meta, private router: Router) { }
+  constructor(private title: Title, private meta: Meta, private router: Router) {
+  }
 
-  generateTags({title = '', description = '', image = '', type = 'article', summary = ''}) {
+  generateTags({
+                 title = '', description = '',
+                 image = 'https://cdn.pixabay.com/photo/2015/10/18/19/04/graduation-995042__340.jpg',
+                 type = 'article', summary = ''
+               }) {
 
     this.title.setTitle(title);
     this.meta.addTags([

@@ -38,7 +38,7 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      zipCode: ['', []],
+      zipCode: ['', [Validators.minLength(5), Validators.maxLength(5)]],
       school: ['', []],
       name: ['', []],
       password: ['', [Validators.minLength(6), Validators.required]],
@@ -67,7 +67,7 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     // Change validators on non essential form fields
     if (this.isSignup) {
       this.imageAdded = false;
-      this.zipCode.setValidators([Validators.required]);
+      this.zipCode.setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
       this.zipCode.updateValueAndValidity();
       this.school.setValidators([Validators.required]);
       this.school.updateValueAndValidity();
@@ -163,7 +163,9 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.isSignup) {
           this.imageUploadService.uploadFile('verification', email, this.verificationImage).then(url => {
             this.verificationImageUrl = url;
-            this.authService.createUser(email, password, name, this.verificationImageUrl, zipCode, school);
+            this.authService.createUser(email, password, name, this.verificationImageUrl, zipCode, school).then(v => {
+              this.loading = false;
+            });
           });
         }
         if (this.isUpdate) {
@@ -176,13 +178,13 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       } catch (err) {
         this.serverMessage = err;
+        this.loading = false;
       }
     } else {
       this.warnImage = true;
     }
 
 
-    this.loading = false;
   }
 
 }

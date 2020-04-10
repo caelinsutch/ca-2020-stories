@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z10">
-  <div class="form" *ngIf="!widgetLoading">
+  <div class="form" *ngIf="!(widgetLoading || loading)">
     <div *ngIf="isSignup">
       <h2>Create Account</h2>
 
@@ -59,6 +59,7 @@
           formControlName="zipCode"
           placeholder="Zip Code"
           autocomplete="off"
+          type="number"
         />
 
         <mat-error *ngIf="zipCode.invalid && zipCode.dirty">
@@ -141,6 +142,7 @@
       </button>
     </form>
 
+
     <button
       mat-button
       *ngIf="isLogin && !isPasswordReset"
@@ -152,18 +154,7 @@
     <hr>
 
   </div>
-  <div *ngIf="widgetLoading">
-    <ngx-skeleton-loader
-      count="1"
-      [theme]="{height: '50px',width: '100%'}"
-    ></ngx-skeleton-loader>
-    <ngx-skeleton-loader
-      count="1"
-      [theme]="{height: '100px', width: '100%'}"
-    ></ngx-skeleton-loader>
-    <ngx-skeleton-loader
-      count="1"
-      [theme]="{height: '100px', width: '100%'}"
-    ></ngx-skeleton-loader>
+  <div *ngIf="widgetLoading || loading" class="my-5 py-5">
+    <mat-spinner diameter="50" class="mx-auto"></mat-spinner>
   </div>
 </mat-card>
