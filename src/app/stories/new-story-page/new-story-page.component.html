@@ -7,7 +7,7 @@
             <h2>Write your story</h2>
           </div>
 
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!loading">
             <mat-form-field [color]="title.valid && 'accent'">
               <input
                 matInput
@@ -43,7 +43,7 @@
 
             <div class="p-3">
               <h4>Upload a photo of yourself or something relating to your story!</h4>
-<!--              <app-uploader></app-uploader>-->
+              <app-uploader (file)="onFile($event)"></app-uploader>
               <mat-error *ngIf="warnImage">Image is required!</mat-error>
             </div>
             <button
@@ -56,6 +56,11 @@
             </button>
           </form>
         </div>
+
+        <div *ngIf="loading">
+          <mat-spinner class="mx-auto"></mat-spinner>
+        </div>
+
         <div class="has-story" *ngIf="hasStories">
           <h1>You've already submitted a story!</h1>
           <p>Want to submit another one? Email caelinsutch@gmail.com for more information :)</p>

@@ -11,6 +11,9 @@
       <a mat-button routerLink="/login" (click)="drawer.close()" *ngIf="afAuth.authState | async as user">
         😀 {{ user.displayName }}
       </a>
+      <a mat-button routerLink="/stories" (click)="drawer.close()" *ngIf="(afAuth.authState | async) && !hasStories">
+        📖 Write
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

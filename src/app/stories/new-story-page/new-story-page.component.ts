@@ -94,6 +94,7 @@ export class NewStoryPageComponent implements OnInit, OnDestroy{
             this.storyService.createStory(storyToSubmit).then(res => {
               if (res == null) {
                 this.snackBar.open('You already uploaded a story! If you want to upload another one contact caelinsutch@gmail.com', 'OK');
+                this.loading = false;
               } else {
                 this.snackBar.open('Thank you for uploading your story! Our team will review it and let you when it\'s uploaded!');
                 this.userService.updateUser({stories: [res.id]}).then(r => {
@@ -104,10 +105,10 @@ export class NewStoryPageComponent implements OnInit, OnDestroy{
           });
         }
       } catch (err) {
+        this.loading = false;
         console.log(err);
       }
 
-      this.loading = false;
     } else {
       this.warnImage = true;
     }
