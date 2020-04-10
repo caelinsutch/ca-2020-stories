@@ -1,22 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from '../user.service';
+import {User} from '../user.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-email-login',
   templateUrl: './email-login.component.html',
   styleUrls: ['./email-login.component.scss']
 })
-export class EmailLoginComponent implements OnInit {
+export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   form: FormGroup;
   imageUrl: string;
   warnImage = false;
   imageAdded = false;
 
-  type: 'login' | 'signup' | 'reset' = 'signup';
+  type: 'login' | 'signup' | 'reset' | 'update' = 'signup';
   loading = false;
+  afAuthSub: Subscription;
+  currentUser: User;
 
   serverMessage: string;
 
@@ -24,7 +28,8 @@ export class EmailLoginComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private fb: FormBuilder,
     private authService: UserService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -37,26 +42,55 @@ export class EmailLoginComponent implements OnInit {
     });
   }
 
-  changeType(val: 'login' | 'signup' | 'reset') {
+  ngAfterViewInit(): void {
+    this.afAuthSub = this.authService.getCurrentUser().subscribe(v => {
+      if (v) {
+        this.changeType('update');
+        this.currentUser = v;
+        this.zipCode.setValue(this.currentUser.zipCode);
+        this.school.setValue(this.currentUser.school);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.isUpdate) {
+      this.afAuthSub.unsubscribe();
+    }
+  }
+
+  changeType(val: 'login' | 'signup' | 'reset' | 'update') {
     this.type = val;
     // Change validators on non essential form fields
     if (this.isSignup) {
       this.imageAdded = false;
-      this.form.get('zipCode').setValidators([Validators.required]);
-      this.form.get('zipCode').updateValueAndValidity();
-      this.form.get('school').setValidators([Validators.required]);
-      this.form.get('school').updateValueAndValidity();
-      this.form.get('name').setValidators([Validators.required]);
-      this.form.get('name').updateValueAndValidity();
+      this.zipCode.setValidators([Validators.required]);
+      this.zipCode.updateValueAndValidity();
+      this.school.setValidators([Validators.required]);
+      this.school.updateValueAndValidity();
+      this.name.setValidators([Validators.required]);
+      this.name.updateValueAndValidity();
+    } else if (this.isUpdate) {
+      this.imageAdded = true;
+      this.zipCode.setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
+      this.zipCode.updateValueAndValidity();
+      this.school.setValidators([Validators.required]);
+      this.school.updateValueAndValidity();
+      this.updateAndClearValidator(this.name);
+      this.updateAndClearValidator(this.email);
+      this.updateAndClearValidator(this.password);
+      this.updateAndClearValidator(this.passwordConfirm);
     } else {
       this.imageAdded = true;
-      this.form.get('zipCode').clearValidators();
-      this.form.get('zipCode').updateValueAndValidity();
-      this.form.get('school').clearValidators();
-      this.form.get('school').updateValueAndValidity();
-      this.form.get('name').clearValidators();
-      this.form.get('name').updateValueAndValidity();
+      this.updateAndClearValidator(this.zipCode);
+      this.updateAndClearValidator(this.school);
+      this.updateAndClearValidator(this.name);
     }
+  }
+
+  private updateAndClearValidator(field) {
+    field.clearValidators();
+    field.updateValueAndValidity();
   }
 
   get isLogin() {
@@ -69,6 +103,10 @@ export class EmailLoginComponent implements OnInit {
 
   get isPasswordReset() {
     return this.type === 'reset';
+  }
+
+  get isUpdate() {
+    return this.type === 'update';
   }
 
   get name() {
@@ -124,6 +162,10 @@ export class EmailLoginComponent implements OnInit {
         }
         if (this.isSignup) {
           await this.authService.createUser(email, password, name, this.imageUrl, zipCode, school);
+        }
+        if (this.isUpdate) {
+          const newUser: User = {school, zipCode};
+          await this.authService.updateUser(newUser);
         }
         if (this.isPasswordReset) {
           await this.afAuth.sendPasswordResetEmail(email);

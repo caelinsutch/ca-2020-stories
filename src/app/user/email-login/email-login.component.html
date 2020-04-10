@@ -19,8 +19,12 @@
     <button size="small" mat-button (click)="changeType('login')">Back</button>
   </div>
 
+  <div *ngIf="isUpdate">
+    <h3>Update Account</h3>
+  </div>
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field [color]="email.valid && 'accent'">
+    <mat-form-field [color]="email.valid && 'accent'" *ngIf="!isUpdate">
       <input
         matInput
         formControlName="email"
@@ -48,7 +52,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field [color]="zipCode.valid && 'accent'" *ngIf="isSignup">
+    <mat-form-field [color]="zipCode.valid && 'accent'" *ngIf="isSignup || isUpdate">
       <input
         matInput
         formControlName="zipCode"
@@ -57,11 +61,11 @@
       />
 
       <mat-error *ngIf="zipCode.invalid && zipCode.dirty">
-        You must enter a zipcode
+        You must enter a 5 character zipcode
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field [color]="school.valid && 'accent'" *ngIf="isSignup">
+    <mat-form-field [color]="school.valid && 'accent'" *ngIf="isSignup || isUpdate">
       <input
         matInput
         formControlName="school"
@@ -74,7 +78,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field [color]="password.valid && 'accent'" *ngIf="!isPasswordReset">
+    <mat-form-field [color]="password.valid && 'accent'" *ngIf="!(isPasswordReset || isUpdate)">
       <input
         matInput
         formControlName="password"
