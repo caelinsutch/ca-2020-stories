@@ -8,7 +8,7 @@ const db = admin.firestore();
 
 exports.zipCodeToLatLng = functions.firestore
   .document('users/{userId}')
-  .onWrite((change, context) => {
+  .onWrite((change) => {
     const ref = change.after.ref;
     const newData = change.after.data();
     const oldData = change.before.data();
@@ -24,7 +24,7 @@ exports.zipCodeToLatLng = functions.firestore
       return ref.update({
         latitude: v.data().Latitude,
         longitude: v.data().Longitude,
-      });
+      })
     })
   })
 
