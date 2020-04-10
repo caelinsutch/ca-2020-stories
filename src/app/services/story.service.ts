@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Story} from './story.model';
 import {Observable} from 'rxjs';
-import {first, map, switchMap} from 'rxjs/operators';
+import {first} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -50,7 +50,11 @@ export class StoryService {
 
   getReviewedStories(): Observable<Story[]> {
     return this.db.collection<Story>(environment.database.stories,
-        ref => ref.where('reviewed', '==', true))
+      ref => ref.where('reviewed', '==', true))
       .valueChanges({idField: 'id'});
+  }
+
+  getAllStories(): Observable<Story[]> {
+    return this.db.collection<Story>(environment.database.stories).valueChanges({idField: 'id'});
   }
 }

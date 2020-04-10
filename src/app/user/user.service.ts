@@ -76,4 +76,8 @@ export class UserService {
       this.router.navigateByUrl('/');
     });
   }
+
+  getAllUser(): Observable<User[]> {
+    return this.db.collection<User>('users').valueChanges({idField: 'uid'});
+  }
 }

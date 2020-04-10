@@ -7,6 +7,7 @@ export class User {
   latitude?: string[];
   longitude?: string[];
   role?: string;
+  uid?: string;
   displayName?: string;
   profileImage?: string;
   email?: string;

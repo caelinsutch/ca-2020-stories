@@ -84,7 +84,7 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   verificationImageAdded = false;
   widgetLoading = true;
 
-  type: 'login' | 'signup' | 'reset' | 'update' = 'signup';
+  type: 'login' | 'signup' | 'reset' | 'update' = 'login';
   loading = false;
   afAuthSub: Subscription;
   currentUser: User;
@@ -192,11 +192,11 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
           });
         }
         if (this.isUpdate) {
-          this.imageUploadService.uploadFile('profile-pictures', email, this.profileImage).then(v => {
+          this.imageUploadService.uploadFile('profile-pictures', this.currentUser.email, this.profileImage).then(v => {
             this.profileImageUrl = v;
+            const newUser: User = {school, zipCode, profileImage: this.profileImageUrl};
+            this.authService.updateUser(newUser);
           });
-          const newUser: User = {school, zipCode, profileImage: this.profileImageUrl};
-          await this.authService.updateUser(newUser);
         }
         if (this.isPasswordReset) {
           await this.afAuth.sendPasswordResetEmail(email);

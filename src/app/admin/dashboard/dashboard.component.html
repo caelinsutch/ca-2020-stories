@@ -4,8 +4,41 @@
       <div class="col-3">
         <mat-card>
           <mat-card-header>
-            <mat-card-title>Overall Users</mat-card-title>
+            <mat-card-title>Overall Stats</mat-card-title>
+            <mat-card-subtitle>Updated Live</mat-card-subtitle>
           </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6 text-center">
+                <h1 class="big-number">{{ users?.length }}</h1>
+                <h4>Number of Users</h4>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6 text-center">
+                <h1 class="big-number">{{ stories?.length }}</h1>
+                <h4>Number of Stories</h4>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-3">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Approved Stats</mat-card-title>
+            <mat-card-subtitle>Updated Live</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6 text-center">
+                <h1 class="big-number">{{ approvedUsers?.length }}</h1>
+                <h4>Number of Approved Users</h4>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6 text-center">
+                <h1 class="big-number">{{ approvedStories?.length }}</h1>
+                <h4>Number of Approved Stories</h4>
+              </div>
+            </div>
+          </mat-card-content>
         </mat-card>
       </div>
     </div>

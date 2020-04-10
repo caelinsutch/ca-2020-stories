@@ -30,4 +30,10 @@ export class SnackService {
       duration: 5000,
     });
   }
+
+  error(message) {
+    this.snackBar.open(message, 'OK', {
+      duration: 5000
+    });
+  }
 }
