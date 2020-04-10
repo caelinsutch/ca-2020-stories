@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
@@ -23,5 +23,11 @@ export class SnackService {
         })
       )
       .subscribe();
+  }
+
+  adminError() {
+    this.snackBar.open('You must be an admin!', 'OK', {
+      duration: 5000,
+    });
   }
 }

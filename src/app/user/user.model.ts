@@ -6,4 +6,11 @@ export class User {
   stories?: string[]; // List of names of stories
   latitude?: string[];
   longitude?: string[];
+  role?: string;
+  displayName?: string;
+  profileImage?: string;
+  email?: string;
+  permissions?: {
+    emailOptIn?: boolean;
+  };
 }

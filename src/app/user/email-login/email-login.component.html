@@ -110,13 +110,33 @@
           Password does not match
         </mat-error>
       </mat-form-field>
+
+      <mat-checkbox
+        formControlName="emailOptIn"
+        *ngIf="isSignup"
+      >Receive Emails from Us
+      </mat-checkbox>
+
+      <div class="upload-segment" *ngIf="isSignup || isUpdate">
+        <h4>Upload a profile picture</h4>
+        <app-uploader (file)="onProfileFile($event)" [id]="'profile'"></app-uploader>
+        <h4 *ngIf="isUpdate">Current Profile Picture: </h4>
+        <img [src]="currentUser.profileImage" mat-card-avatar alt="current profile picture" class="mx-auto"
+             *ngIf="isUpdate">
+      </div>
+
+      <mat-error *ngIf="verificationWarnImage">
+        You must upload a profile image!
+      </mat-error>
+
+
       <div class="upload-segment" *ngIf="isSignup">
         <h4>Upload a photo of your ID card or some other identification to verify you're a 2020 California HS
           senior</h4>
-        <app-uploader (file)="onFile($event)"></app-uploader>
+        <app-uploader (file)="onVerificationFile($event)" [id]="'verification'"></app-uploader>
       </div>
 
-      <mat-error *ngIf="warnImage">
+      <mat-error *ngIf="verificationWarnImage">
         You must upload a verification image!
       </mat-error>
 
@@ -136,7 +156,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="form.invalid || !passwordDoesMatch || loading || !imageAdded"
+        [disabled]="form.invalid || !passwordDoesMatch || loading || !verificationImageAdded"
       >
         Submit
       </button>

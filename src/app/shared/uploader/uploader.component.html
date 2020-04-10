@@ -1,10 +1,10 @@
 <div>
-  <label for="file">
+  <label for="{{id}}">
     <mat-icon color="white" inline="true" class="p-1">cloud_upload</mat-icon>
     Upload</label>
-  <input type="file" id="file" class="inputfile" (change)="onUpload($event)">
+  <input type="file" id="{{id}}" class="inputfile" (change)="onUpload($event)">
 
-
+  s
   <div *ngIf="imageUrl">
     <h3>Preview</h3>
     <img [src]="imageUrl" alt="uploaded photo"><br>

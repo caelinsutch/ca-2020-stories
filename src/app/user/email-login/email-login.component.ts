@@ -13,84 +13,12 @@ import {ImageUploadService} from '../../shared/image-upload.service';
 })
 export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  form: FormGroup;
-  verificationImage: File;
-  verificationImageUrl: string;
-  warnImage = false;
-  imageAdded = false;
-  widgetLoading = true;
-
-  type: 'login' | 'signup' | 'reset' | 'update' = 'signup';
-  loading = false;
-  afAuthSub: Subscription;
-  currentUser: User;
-
-  serverMessage: string;
-
   constructor(
     private afAuth: AngularFireAuth,
     private fb: FormBuilder,
     private authService: UserService,
     private imageUploadService: ImageUploadService,
   ) {
-  }
-
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      zipCode: ['', [Validators.minLength(5), Validators.maxLength(5)]],
-      school: ['', []],
-      name: ['', []],
-      password: ['', [Validators.minLength(6), Validators.required]],
-      passwordConfirm: ['', []],
-    });
-  }
-
-  ngAfterViewInit(): void {
-    this.afAuthSub = this.authService.getCurrentUser().subscribe(v => {
-      this.widgetLoading = false;
-      if (v) {
-        this.changeType('update');
-        this.currentUser = v;
-        this.zipCode.setValue(this.currentUser.zipCode);
-        this.school.setValue(this.currentUser.school);
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.afAuthSub.unsubscribe();
-  }
-
-  changeType(val: 'login' | 'signup' | 'reset' | 'update') {
-    this.type = val;
-    // Change validators on non essential form fields
-    if (this.isSignup) {
-      this.imageAdded = false;
-      this.zipCode.setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
-      this.zipCode.updateValueAndValidity();
-      this.school.setValidators([Validators.required]);
-      this.school.updateValueAndValidity();
-      this.name.setValidators([Validators.required]);
-      this.name.updateValueAndValidity();
-    } else if (this.isUpdate) {
-      this.imageAdded = true;
-      this.zipCode.setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
-      this.zipCode.updateValueAndValidity();
-      this.school.setValidators([Validators.required]);
-      this.school.updateValueAndValidity();
-      this.updateAndClearValidators([this.name, this.email, this.password, this.passwordConfirm]);
-    } else {
-      this.imageAdded = true;
-      this.updateAndClearValidators([this.zipCode, this.school, this.name]);
-    }
-  }
-
-  private updateAndClearValidators(fields: any[]) {
-    fields.forEach(field => {
-      field.clearValidators();
-      field.updateValueAndValidity();
-    });
   }
 
   get isLogin() {
@@ -125,6 +53,10 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.form.get('email');
   }
 
+  get emailOptIn() {
+    return this.form.get('emailOptIn');
+  }
+
   get password() {
     return this.form.get('password');
   }
@@ -141,10 +73,96 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  onFile($event: File) {
-    this.warnImage = false;
-    this.imageAdded = true;
+  form: FormGroup;
+  verificationImage: File;
+  verificationImageUrl: string;
+  profileImage: File;
+  profileImageUrl: string;
+  warnProfileImage = false;
+  profileImageAdded = false;
+  verificationWarnImage = false;
+  verificationImageAdded = false;
+  widgetLoading = true;
+
+  type: 'login' | 'signup' | 'reset' | 'update' = 'signup';
+  loading = false;
+  afAuthSub: Subscription;
+  currentUser: User;
+
+  serverMessage: string;
+
+  private static updateAndClearValidators(fields: any[]) {
+    fields.forEach(field => {
+      field.clearValidators();
+      field.updateValueAndValidity();
+    });
+  }
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      zipCode: ['', [Validators.minLength(5), Validators.maxLength(5)]],
+      school: ['', []],
+      name: ['', []],
+      password: ['', [Validators.minLength(6), Validators.required]],
+      passwordConfirm: ['', []],
+      emailOptIn: [true, []]
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.afAuthSub = this.authService.getCurrentUser().subscribe(v => {
+      this.widgetLoading = false;
+      if (v) {
+        this.changeType('update');
+        this.currentUser = v;
+        this.zipCode.setValue(this.currentUser.zipCode);
+        this.school.setValue(this.currentUser.school);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.afAuthSub.unsubscribe();
+  }
+
+  changeType(val: 'login' | 'signup' | 'reset' | 'update') {
+    this.type = val;
+    // Change validators on non essential form fields
+    if (this.isSignup) {
+      this.profileImageAdded = false;
+      this.verificationImageAdded = false;
+      this.zipCode.setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
+      this.zipCode.updateValueAndValidity();
+      this.school.setValidators([Validators.required]);
+      this.school.updateValueAndValidity();
+      this.name.setValidators([Validators.required]);
+      this.name.updateValueAndValidity();
+    } else if (this.isUpdate) {
+      this.profileImageAdded = true;
+      this.verificationImageAdded = true;
+      this.zipCode.setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
+      this.zipCode.updateValueAndValidity();
+      this.school.setValidators([Validators.required]);
+      this.school.updateValueAndValidity();
+      EmailLoginComponent.updateAndClearValidators([this.name, this.email, this.password, this.passwordConfirm]);
+    } else {
+      this.profileImageAdded = true;
+      this.verificationImageAdded = true;
+      EmailLoginComponent.updateAndClearValidators([this.zipCode, this.school, this.name]);
+    }
+  }
+
+  onVerificationFile($event: File) {
+    this.verificationWarnImage = false;
+    this.verificationImageAdded = true;
     this.verificationImage = $event;
+  }
+
+  onProfileFile($event: File) {
+    this.warnProfileImage = false;
+    this.profileImageAdded = true;
+    this.profileImage = $event;
   }
 
   async onSubmit() {
@@ -155,21 +173,29 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     const name = this.name.value;
     const zipCode = this.zipCode.value;
     const school = this.school.value;
-    if (this.imageAdded || !this.isSignup) {
+    const emailOptIn = this.emailOptIn.value;
+    if (this.verificationImageAdded || this.profileImageAdded || !this.isSignup) {
       try {
         if (this.isLogin) {
           await this.authService.loginUser(email, password);
         }
         if (this.isSignup) {
+          await this.imageUploadService.uploadFile('profile-pictures', email, this.profileImage).then(v => {
+            this.profileImageUrl = v;
+          });
           this.imageUploadService.uploadFile('verification', email, this.verificationImage).then(url => {
             this.verificationImageUrl = url;
-            this.authService.createUser(email, password, name, this.verificationImageUrl, zipCode, school).then(v => {
+            this.authService.createUser(email, password, name, this.verificationImageUrl, zipCode,
+              school, emailOptIn, this.profileImageUrl).then(() => {
               this.loading = false;
             });
           });
         }
         if (this.isUpdate) {
-          const newUser: User = {school, zipCode};
+          this.imageUploadService.uploadFile('profile-pictures', email, this.profileImage).then(v => {
+            this.profileImageUrl = v;
+          });
+          const newUser: User = {school, zipCode, profileImage: this.profileImageUrl};
           await this.authService.updateUser(newUser);
         }
         if (this.isPasswordReset) {
@@ -181,7 +207,7 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.loading = false;
       }
     } else {
-      this.warnImage = true;
+      this.verificationWarnImage = true;
     }
 
 

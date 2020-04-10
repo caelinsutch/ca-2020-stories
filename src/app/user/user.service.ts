@@ -27,13 +27,21 @@ export class UserService {
     displayName: string,
     verificationImage: string,
     zipCode: string,
-    school: string): Promise<any> {
+    school: string,
+    emailOptIn: boolean,
+    profileImage: string): Promise<any> {
     const cred: UserCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
     await cred.user.updateProfile({displayName});
     return this.db.collection(environment.database.users).doc<User>(cred.user.uid).set({
+      displayName,
+      email,
       verificationImage,
       zipCode,
       school,
+      profileImage,
+      permissions: {
+        emailOptIn
+      },
       verified: false,
     });
   }

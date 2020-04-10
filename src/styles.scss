@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5 {
 
 .space-background {
   background-image: url("~/assets/backgrounds.svg");
-  object-fit: cover;
+  background-size: cover;
   width: 100%;
   min-height: 100%;
 }
@@ -87,6 +87,12 @@ h1, h2, h3, h4, h5 {
   padding-bottom: 4rem;
   padding-top: 4rem;
 }
+
+.py-7 {
+  padding-bottom: 5rem;
+  padding-top: 5rem;
+}
+
 
 .mat-raised-button {
   font-size: 1.25em;
