@@ -12,6 +12,8 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {HomePageComponent} from './home-page/home-page.component';
 import {MarkdownModule} from 'ngx-markdown';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import {MarkdownModule} from 'ngx-markdown';
     AngularFireAuthModule,
     SharedModule,
     MarkdownModule.forRoot(),
+    MatProgressBarModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

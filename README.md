@@ -11,6 +11,7 @@ https://ca-2020.web.app/
 
 CA 2020 Web application. Built with Angular 9 and Angular Material. 
 Uses a Firebase backend and Fireauth. Deployed via Firebase hosting on Github CI.
+Github function used to convert zipcode to Lat/Long coordinates
 Released using `release-it`
 
 ## Getting started with development
@@ -23,4 +24,4 @@ Run `ng serve` in root for a dev server. Navigate to `http://localhost:4200/`. T
 
 ## Contributors
 Developed by:
-- [Caelin Sutch](caelinsutch.com) - Initial Work
+- [Caelin Sutch](https://caelinsutch.com) - Initial Work

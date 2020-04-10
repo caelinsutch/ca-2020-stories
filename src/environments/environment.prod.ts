@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  url: 'https://ca-2020.web.app/',
   firebase: {
     apiKey: 'AIzaSyC7yMBAbVBl2vl_4DAgcevwmDvFn3hjtIA',
     authDomain: 'ca-2020.firebaseapp.com',

@@ -43,7 +43,7 @@
 
             <div class="p-3">
               <h4>Upload a photo of yourself or something relating to your story!</h4>
-              <app-uploader [fileLocation]="'story'" (url)="onUpload($event)"></app-uploader>
+<!--              <app-uploader></app-uploader>-->
               <mat-error *ngIf="warnImage">Image is required!</mat-error>
             </div>
             <button

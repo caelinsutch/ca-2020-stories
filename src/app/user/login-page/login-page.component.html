@@ -1,7 +1,7 @@
 <main class="container-fluid py-6 space-background">
   <div class="row">
     <div class="col-12 text-center">
-      <div *ngIf="!(afAuth.authState | async)">
+      <div>
         <app-email-login></app-email-login>
       </div>
 
@@ -15,7 +15,7 @@
 
           <h3>Account Status</h3>
           <p>Your account is {{(userService.getCurrentUser() | async)?.verified ? 'verified' : 'not yet verified' }} </p>
-          <button mat-raised-button color="primary" (click)="afAuth.signOut()">Sign Out</button>
+          <button mat-raised-button color="primary" (click)="userService.logout()">Sign Out</button>
         </mat-card>
       </div>
     </div>

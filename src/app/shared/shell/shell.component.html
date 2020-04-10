@@ -3,13 +3,13 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar class="font-weight-bold"><h2 class="gradient-text">CA 2020</h2></mat-toolbar>
     <mat-nav-list>
 
-      <a mat-list-item routerLink="/" (click)="drawer.close()">Home</a>
+      <a mat-list-item routerLink="/" (click)="drawer.close()">🏠 Home</a>
       <a mat-list-item routerLink="/login" (click)="drawer.close()" *ngIf="!(afAuth.authState | async)">🔑 Login</a>
-      <a mat-button routerLink="/login" *ngIf="afAuth.authState | async as user" >
-        {{ user.displayName }}
+      <a mat-button routerLink="/login" (click)="drawer.close()" *ngIf="afAuth.authState | async as user">
+        😀 {{ user.displayName }}
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -35,7 +35,7 @@
 
           <button mat-button routerLink="/login" *ngIf="!(afAuth.authState | async)" style="margin-top: 2px;">🔑 Login</button>
           <button mat-button routerLink="/login" *ngIf="afAuth.authState | async as user">
-            {{ user.displayName }}
+            😀 {{ user.displayName }}
           </button>
           <button mat-button routerLink="/stories" *ngIf="(afAuth.authState | async) && !hasStories">
             📖 Write
@@ -49,11 +49,14 @@
       </div>
 
       <mat-menu #menu="matMenu">
+        <p class="font-weight-bold mb-1 pl-3">
+          <span>Made by Caelin Sutch</span>
+        </p>
         <a mat-menu-item href="https://caelinsutch.com">
           <i>🌐</i>
           <span>See my website</span>
         </a>
-        <a mat-menu-item href="https://github.com/caelinsutch/">
+        <a mat-menu-item href="https://github.com/caelinsutch/ca-2020-stories">
           <i>💾</i>
           <span>Contribute on Github</span>
         </a>

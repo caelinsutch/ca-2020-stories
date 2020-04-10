@@ -8,31 +8,15 @@ import {AngularFireAuth} from '@angular/fire/auth';
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss']
 })
-export class UploaderComponent implements OnDestroy{
+export class UploaderComponent {
 
-  @Input() fileLocation: string;
-  @Output() url: EventEmitter<string> = new EventEmitter<string>();
-  downloadURL: string;
-  sub: Subscription;
-  uploading = false;
+  @Output() file: EventEmitter<File> = new EventEmitter<File>();
+  imageUrl;
 
-  constructor(private afStorage: AngularFireStorage, private afAuth: AngularFireAuth) { }
-
-  ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
-
-
-  async onUpload(event) {
-    this.uploading = true;
-    const hash = Date.now();
-    await this.afStorage.ref(this.fileLocation + '/' + hash).put(event.target.files[0]);
-    this.sub = this.afStorage.ref(this.fileLocation + '/' + hash).getDownloadURL().subscribe(v => {
-      this.uploading = false;
-      this.downloadURL = v;
-      this.url.emit(this.downloadURL);
-    });
+  onUpload(event) {
+    const reader = new FileReader();
+    reader.onload = e => this.imageUrl = reader.result;
+    reader.readAsDataURL(event.target.files[0]);
+    this.file.emit(event.target.files[0]);
   }
 }

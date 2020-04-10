@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ShellComponent } from './shell/shell.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ShellComponent} from './shell/shell.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -13,11 +13,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {RouterModule} from '@angular/router';
-import { UploaderComponent } from './uploader/uploader.component';
-import { DropZoneDirective } from './dropzone.directive';
+import {UploaderComponent} from './uploader/uploader.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import {StoryFilterPipe} from './StoryFilter.pipe';
 
 const modules: Array<any> = [
   MatToolbarModule,
@@ -41,6 +41,7 @@ const modules: Array<any> = [
 const components: Array<any> = [
   ShellComponent,
   UploaderComponent,
+  StoryFilterPipe,
 ];
 
 @NgModule({

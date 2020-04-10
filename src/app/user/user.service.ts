@@ -5,6 +5,7 @@ import {User} from './user.model';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
 import UserCredential = firebase.auth.UserCredential;
 
 @Injectable({
@@ -16,14 +17,23 @@ export class UserService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
-  ) { }
+    private router: Router,
+  ) {
+  }
 
-  async createUser(email: string, password: string, displayName: string, verificationImage: string, zipCode: string): Promise<any> {
+  async createUser(
+    email: string,
+    password: string,
+    displayName: string,
+    verificationImage: string,
+    zipCode: string,
+    school: string): Promise<any> {
     const cred: UserCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
     await cred.user.updateProfile({displayName});
     return this.db.collection(environment.database.users).doc<User>(cred.user.uid).set({
       verificationImage,
       zipCode,
+      school,
       verified: false,
     });
   }
@@ -51,5 +61,11 @@ export class UserService {
 
   async loginUser(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
+  }
+
+  async logout() {
+    return this.afAuth.signOut().then(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 }

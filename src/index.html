@@ -2,14 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Ca2020stories</title>
+  <title>CA 2020 Stories</title>
+  <meta name="description" content="A collection of stories of California High School Seniors"/>
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="A collection of stories of California High School Seniors ">
+  <meta name="twitter:site" content="@caelinsutch">
+  <meta name="twitter:title" content="CA 2020 Stories">
+  <meta name="twitter:description" content="A collection of stories of California High School Seniors">
+  <meta name="twitter:creator" content="@caelinsutch">
+  <!--  TOOD Update with image-->
+  <meta name="twitter:image" content="">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="CA 2020 Seniors"/>
+  <meta property="og:type" content="page"/>
+  <!--  TODO Update with permanenet URL-->
+  <meta property="og:url" content="https://ca-2020.web.app/"/>
+  <!--  TODO Update with image-->
+  <meta property="og:image" content="http://example.com/image.jpg"/>
+  <meta property="og:description" content="A collection of stories of California High School Seniors"/>
+  <meta property="og:site_name" content="CA 2020 Stories"/>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+    body, html {
+      height: 100vh;
+      width: 100vw;
+    }
+
+    app-root {
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .loader {
+      margin-top: 33vh;
+      height: 30vh;
+      width: 30vh;
+      margin-right: 16px;
+      border-radius: 50%;
+    }
+
+    .grey-background {
+      height: 100vh;
+      width: 100vw;
+      color: lightgray;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body class="mat-typography">
-  <app-root></app-root>
+
+<app-root>
+  <div class="grey-background">
+    <img src="../assets/rocket.gif" class="loader" alt="" >
+  </div>
+</app-root>
 </body>
 </html>
