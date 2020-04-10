@@ -11,6 +11,10 @@ import {ImageUploadService} from '../../shared/image-upload.service';
   templateUrl: './email-login.component.html',
   styleUrls: ['./email-login.component.scss']
 })
+
+// TODO this is getting too fat and unmainatable, splitup into seperate login, signup, and update forms
+// TODO Signup as a stepper, inidivudla file upload indicators (progress) for each step where image upload required
+// TODO Update have a file upload progress indicator
 export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
@@ -149,7 +153,7 @@ export class EmailLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.profileImageAdded = true;
       this.verificationImageAdded = true;
-      EmailLoginComponent.updateAndClearValidators([this.zipCode, this.school, this.name]);
+      EmailLoginComponent.updateAndClearValidators([this.zipCode, this.school, this.name, this.passwordConfirm]);
     }
   }
 

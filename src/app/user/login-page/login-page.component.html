@@ -2,21 +2,18 @@
   <div class="row">
     <div class="col-12 text-center">
       <div>
-        <app-email-login></app-email-login>
-      </div>
+        <app-email-login>
+          <div *ngIf="afAuth.authState | async as user" class="logout">
+              <h1 class="font-weight-bold">Welcome {{ user.displayName}}!</h1>
+              <p>
+                Logged in as <strong>{{ user.email }}</strong>
+              </p>
 
-
-      <div *ngIf="afAuth.authState | async as user" class="logout">
-        <mat-card class="mat-elevation-z10">
-          <h1 class="font-weight-bold">Welcome {{ user.displayName}}!</h1>
-          <p>
-            Logged in as <strong>{{ user.email }}</strong>
-          </p>
-
-          <h3>Account Status</h3>
-          <p>Your account is {{(userService.getCurrentUser() | async)?.verificationStatus }} </p>
-          <button mat-raised-button color="primary" (click)="userService.logout()">Sign Out</button>
-        </mat-card>
+              <h3>Account Status</h3>
+              <p>Your account is {{(userService.getCurrentUser() | async)?.verificationStatus }} </p>
+              <button mat-raised-button color="primary" (click)="userService.logout()">Sign Out</button>
+          </div>
+        </app-email-login>
       </div>
     </div>
   </div>
