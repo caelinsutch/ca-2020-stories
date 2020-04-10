@@ -1,67 +1,67 @@
 <main class="container-fluid py-6 space-background">
   <div class="row">
     <div class="col-12 text-center">
-      <mat-card class="mat-elevation-z10 text-center">
-        <div class="new-story" *ngIf="!hasStories">
-          <div>
-            <h2>Write your story</h2>
-          </div>
+<!--      <mat-card class="mat-elevation-z10 text-center">-->
+<!--        <div class="new-story" *ngIf="!hasStories">-->
+<!--          <div>-->
+<!--            <h2>Write your story</h2>-->
+<!--          </div>-->
 
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-form-field [color]="title.valid && 'accent'">
-              <input
-                matInput
-                formControlName="title"
-                type="string"
-                placeholder="Title"
-              />
+<!--          <form [formGroup]="form" (ngSubmit)="onSubmit()">-->
+<!--            <mat-form-field [color]="title.valid && 'accent'">-->
+<!--              <input-->
+<!--                matInput-->
+<!--                formControlName="title"-->
+<!--                type="string"-->
+<!--                placeholder="Title"-->
+<!--              />-->
 
-              <mat-error *ngIf="title.invalid && title.dirty">
-                Title is required
-              </mat-error>
-            </mat-form-field>
+<!--              <mat-error *ngIf="title.invalid && title.dirty">-->
+<!--                Title is required-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
 
-            <mat-label>Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>
-            </mat-label>
-            <mat-form-field [color]="story.valid && 'accent'">
-            <textarea
-              matInput
-              formControlName="story"
-              type="string"
-              placeholder="Story (supports markdown)"
-            ></textarea>
+<!--            <mat-label>Supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>-->
+<!--            </mat-label>-->
+<!--            <mat-form-field [color]="story.valid && 'accent'">-->
+<!--            <textarea-->
+<!--              matInput-->
+<!--              formControlName="story"-->
+<!--              type="string"-->
+<!--              placeholder="Story (supports markdown)"-->
+<!--            ></textarea>-->
 
-              <mat-error *ngIf="story.invalid && story.dirty">
-                Story is required
-              </mat-error>
-            </mat-form-field>
+<!--              <mat-error *ngIf="story.invalid && story.dirty">-->
+<!--                Story is required-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
 
-            <h3>Preview of Markdown</h3>
-            <markdown [data]="story.value" class="text-left">
+<!--            <h3>Preview of Markdown</h3>-->
+<!--            <markdown [data]="story.value" class="text-left">-->
 
-            </markdown>
+<!--            </markdown>-->
 
-            <div class="p-3">
-              <h4>Upload a photo of yourself or something relating to your story!</h4>
-              <app-uploader [fileLocation]="'story'" (url)="onUpload($event)"></app-uploader>
-              <mat-error *ngIf="warnImage">Image is required!</mat-error>
-            </div>
-            <button
-              color="primary"
-              mat-raised-button
-              type="submit"
-              [disabled]="form.invalid || loading || this.warnImage"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-        <div class="has-story" *ngIf="hasStories">
-          <h1>You've already submitted a story!</h1>
-          <p>Want to submit another one? Email caelinsutch@gmail.com for more information :)</p>
-        </div>
+<!--            <div class="p-3">-->
+<!--              <h4>Upload a photo of yourself or something relating to your story!</h4>-->
+<!--&lt;!&ndash;              <app-uploader></app-uploader>&ndash;&gt;-->
+<!--              <mat-error *ngIf="warnImage">Image is required!</mat-error>-->
+<!--            </div>-->
+<!--            <button-->
+<!--              color="primary"-->
+<!--              mat-raised-button-->
+<!--              type="submit"-->
+<!--              [disabled]="form.invalid || loading || this.warnImage"-->
+<!--            >-->
+<!--              Submit-->
+<!--            </button>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--        <div class="has-story" *ngIf="hasStories">-->
+<!--          <h1>You've already submitted a story!</h1>-->
+<!--          <p>Want to submit another one? Email caelinsutch@gmail.com for more information :)</p>-->
+<!--        </div>-->
 
-      </mat-card>
+<!--      </mat-card>-->
     </div>
   </div>
 </main>

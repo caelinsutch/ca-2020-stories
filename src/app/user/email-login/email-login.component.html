@@ -1,149 +1,169 @@
 <mat-card class="mat-elevation-z10">
-  <div *ngIf="isSignup">
-    <h2>Create Account</h2>
+  <div class="form" *ngIf="!widgetLoading">
+    <div *ngIf="isSignup">
+      <h2>Create Account</h2>
 
-    <button mat-stroked-button (click)="changeType('login')">
-      Returning user?
-    </button>
-  </div>
-
-  <div *ngIf="isLogin">
-    <h2>Sign In</h2>
-    <button size="small" mat-stroked-button (click)="changeType('signup')">
-      New user?
-    </button>
-  </div>
-
-  <div *ngIf="isPasswordReset">
-    <h3>Reset Password</h3>
-    <button size="small" mat-button (click)="changeType('login')">Back</button>
-  </div>
-
-  <div *ngIf="isUpdate">
-    <h3>Update Account</h3>
-  </div>
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field [color]="email.valid && 'accent'" *ngIf="!isUpdate">
-      <input
-        matInput
-        formControlName="email"
-        type="email"
-        placeholder="Email"
-        autocomplete="off"
-      />
-
-      <mat-error *ngIf="email.invalid && email.dirty">
-        You must enter a valid email address
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field [color]="name.valid && 'accent'" *ngIf="isSignup">
-      <input
-        matInput
-        formControlName="name"
-        type="text"
-        placeholder="Name"
-        autocomplete="on"
-      />
-
-      <mat-error *ngIf="name.invalid && name.dirty">
-        You must enter a name
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field [color]="zipCode.valid && 'accent'" *ngIf="isSignup || isUpdate">
-      <input
-        matInput
-        formControlName="zipCode"
-        placeholder="Zip Code"
-        autocomplete="off"
-      />
-
-      <mat-error *ngIf="zipCode.invalid && zipCode.dirty">
-        You must enter a 5 character zipcode
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field [color]="school.valid && 'accent'" *ngIf="isSignup || isUpdate">
-      <input
-        matInput
-        formControlName="school"
-        placeholder="School"
-        autocomplete="on"
-      />
-
-      <mat-error *ngIf="school.invalid && school.dirty">
-        You must enter a school name
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field [color]="password.valid && 'accent'" *ngIf="!(isPasswordReset || isUpdate)">
-      <input
-        matInput
-        formControlName="password"
-        type="password"
-        placeholder="Password"
-        autocomplete="off"
-      />
-
-      <mat-error *ngIf="password.invalid && password.dirty">
-        Password must be at least 6 characters long
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field
-      [color]="passwordDoesMatch ? 'accent' : 'warn'"
-      *ngIf="isSignup"
-    >
-      <input
-        matInput
-        formControlName="passwordConfirm"
-        type="password"
-        placeholder="Confirm password"
-        autocomplete="off"
-      />
-
-      <mat-error *ngIf="passwordConfirm.dirty && !passwordDoesMatch">
-        Password does not match
-      </mat-error>
-    </mat-form-field>
-    <div class="upload-segment" *ngIf="isSignup" >
-      <h4>Upload a photo of your ID card or some other identification to verify you're a 2020 California HS senior</h4>
-      <app-uploader [fileLocation]="'verification'" (url)="onUpload($event)"></app-uploader>
+      <button mat-stroked-button (click)="changeType('login')">
+        Returning user?
+      </button>
     </div>
 
-    <mat-error *ngIf="warnImage">
-      You must upload a verification image!
-    </mat-error>
+    <div *ngIf="isLogin">
+      <h2>Sign In</h2>
+      <button size="small" mat-stroked-button (click)="changeType('signup')">
+        New user?
+      </button>
+    </div>
 
-    <mat-error class="server-error">{{ serverMessage }}</mat-error>
+    <div *ngIf="isPasswordReset">
+      <h3>Reset Password</h3>
+      <button size="small" mat-button (click)="changeType('login')">Back</button>
+    </div>
+
+    <div *ngIf="isUpdate">
+      <h3>Update Account</h3>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field [color]="email.valid && 'accent'" *ngIf="!isUpdate">
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          placeholder="Email"
+          autocomplete="off"
+        />
+
+        <mat-error *ngIf="email.invalid && email.dirty">
+          You must enter a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field [color]="name.valid && 'accent'" *ngIf="isSignup">
+        <input
+          matInput
+          formControlName="name"
+          type="text"
+          placeholder="Name"
+          autocomplete="on"
+        />
+
+        <mat-error *ngIf="name.invalid && name.dirty">
+          You must enter a name
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field [color]="zipCode.valid && 'accent'" *ngIf="isSignup || isUpdate">
+        <input
+          matInput
+          formControlName="zipCode"
+          placeholder="Zip Code"
+          autocomplete="off"
+        />
+
+        <mat-error *ngIf="zipCode.invalid && zipCode.dirty">
+          You must enter a 5 character zipcode
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field [color]="school.valid && 'accent'" *ngIf="isSignup || isUpdate">
+        <input
+          matInput
+          formControlName="school"
+          placeholder="School"
+          autocomplete="on"
+        />
+
+        <mat-error *ngIf="school.invalid && school.dirty">
+          You must enter a school name
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field [color]="password.valid && 'accent'" *ngIf="!(isPasswordReset || isUpdate)">
+        <input
+          matInput
+          formControlName="password"
+          type="password"
+          placeholder="Password"
+          autocomplete="off"
+        />
+
+        <mat-error *ngIf="password.invalid && password.dirty">
+          Password must be at least 6 characters long
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        [color]="passwordDoesMatch ? 'accent' : 'warn'"
+        *ngIf="isSignup"
+      >
+        <input
+          matInput
+          formControlName="passwordConfirm"
+          type="password"
+          placeholder="Confirm password"
+          autocomplete="off"
+        />
+
+        <mat-error *ngIf="passwordConfirm.dirty && !passwordDoesMatch">
+          Password does not match
+        </mat-error>
+      </mat-form-field>
+      <div class="upload-segment" *ngIf="isSignup">
+        <h4>Upload a photo of your ID card or some other identification to verify you're a 2020 California HS
+          senior</h4>
+        <app-uploader (file)="onFile($event)"></app-uploader>
+      </div>
+
+      <mat-error *ngIf="warnImage">
+        You must upload a verification image!
+      </mat-error>
+
+      <mat-error class="server-error">{{ serverMessage }}</mat-error>
+
+      <button
+        *ngIf="isPasswordReset"
+        mat-stroked-button
+        type="submit"
+        [disabled]="loading"
+      >
+        Send Reset Email
+      </button>
+
+      <button
+        *ngIf="!isPasswordReset"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || !passwordDoesMatch || loading || !imageAdded"
+      >
+        Submit
+      </button>
+    </form>
 
     <button
-      *ngIf="isPasswordReset"
-      mat-stroked-button
-      type="submit"
-      [disabled]="loading"
+      mat-button
+      *ngIf="isLogin && !isPasswordReset"
+      (click)="changeType('reset')"
     >
-      Send Reset Email
+      Forgot password?
     </button>
 
-    <button
-      *ngIf="!isPasswordReset"
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="form.invalid || !passwordDoesMatch || loading || !imageAdded"
-    >
-      Submit
-    </button>
-  </form>
+    <hr>
 
-  <button
-    mat-button
-    *ngIf="isLogin && !isPasswordReset"
-    (click)="changeType('reset')"
-  >
-    Forgot password?
-  </button>
+  </div>
+  <div *ngIf="widgetLoading">
+    <ngx-skeleton-loader
+      count="1"
+      [theme]="{height: '50px',width: '100%'}"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      count="1"
+      [theme]="{height: '100px', width: '100%'}"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      count="1"
+      [theme]="{height: '100px', width: '100%'}"
+    ></ngx-skeleton-loader>
+  </div>
 </mat-card>

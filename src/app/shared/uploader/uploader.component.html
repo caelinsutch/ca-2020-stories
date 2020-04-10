@@ -1,18 +1,12 @@
 <div>
-  <label for="file"
-          *ngIf="!uploading || downloadURL === null">
+  <label for="file">
     <mat-icon color="white" inline="true" class="p-1">cloud_upload</mat-icon>
     Upload</label>
   <input type="file" id="file" class="inputfile" (change)="onUpload($event)">
 
-  <div class="uploading text-center" *ngIf="uploading">
-    <mat-spinner diameter="30" class="mx-auto"></mat-spinner>
-    <p>Uploading....</p>
-  </div>
 
-
-  <div *ngIf="downloadURL as url">
+  <div *ngIf="imageUrl">
     <h3>Preview</h3>
-    <img [src]="url" alt="uploaded photo"><br>
+    <img [src]="imageUrl" alt="uploaded photo"><br>
   </div>
 </div>

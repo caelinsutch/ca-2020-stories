@@ -8,7 +8,7 @@
 
       <a mat-list-item routerLink="/" (click)="drawer.close()">🏠 Home</a>
       <a mat-list-item routerLink="/login" (click)="drawer.close()" *ngIf="!(afAuth.authState | async)">🔑 Login</a>
-      <a mat-button routerLink="/login" *ngIf="afAuth.authState | async as user">
+      <a mat-button routerLink="/login" (click)="drawer.close()" *ngIf="afAuth.authState | async as user">
         😀 {{ user.displayName }}
       </a>
     </mat-nav-list>
