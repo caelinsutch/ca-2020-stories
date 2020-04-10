@@ -115,3 +115,16 @@ mat-card {
 a:hover {
   color: inherit;
 }
+
+.loader {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 35vh;
+  height: 30vh;
+  width: 30vh;
+  border-radius: 50%;
+}
+
+.grey-background {
+  color: lightgray;
+}

@@ -6,6 +6,7 @@ import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import UserCredential = firebase.auth.UserCredential;
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class UserService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
+    private router: Router,
   ) {
   }
 
@@ -59,5 +61,11 @@ export class UserService {
 
   async loginUser(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
+  }
+
+  async logout() {
+    return this.afAuth.signOut().then(
+      this.router.navigateByUrl('/')
+    )
   }
 }
