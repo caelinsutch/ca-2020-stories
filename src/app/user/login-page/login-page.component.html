@@ -14,7 +14,7 @@
           </p>
 
           <h3>Account Status</h3>
-          <p>Your account is {{(userService.getCurrentUser() | async)?.verified ? 'verified' : 'not yet verified' }} </p>
+          <p>Your account is {{(userService.getCurrentUser() | async)?.verificationStatus }} </p>
           <button mat-raised-button color="primary" (click)="userService.logout()">Sign Out</button>
         </mat-card>
       </div>

@@ -42,7 +42,7 @@ export class UserService {
       permissions: {
         emailOptIn
       },
-      verified: false,
+      verificationStatus: 'waiting verification',
     });
   }
 

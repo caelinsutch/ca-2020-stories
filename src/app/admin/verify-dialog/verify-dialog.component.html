@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Verify {{localData.displayName}}</h1>
+<div mat-dialog-content>
+  <h2>School: {{localData.school}}</h2>
+  <img [src]="localData.verificationImage" alt="Verification Image">
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="verify()" color="green">Verify</button>
+  <button mat-stroked-button (click)="flag()" color="yellow">Flag</button>
+  <button mat-stroked-button (click)="reject()" color="red">Cancel</button>
+</div>

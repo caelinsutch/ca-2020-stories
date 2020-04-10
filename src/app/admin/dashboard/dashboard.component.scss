@@ -9,4 +9,10 @@ h4 {
 
 mat-card {
   height: 340px;
+  max-width: none;
+}
+
+table {
+  width: 100%;
+  max-width: none;
 }

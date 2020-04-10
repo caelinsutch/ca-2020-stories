@@ -1,6 +1,6 @@
 export class User {
   zipCode?: string;
-  verified?: boolean;
+  verificationStatus?: string;
   verificationImage?: string;
   school?: string;
   stories?: string[]; // List of names of stories
