@@ -4,4 +4,6 @@ export class User {
   verificationImage?: string;
   school?: string;
   stories?: string[]; // List of names of stories
+  latitude?: string[];
+  longitude?: string[];
 }
