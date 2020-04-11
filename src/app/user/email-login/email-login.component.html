@@ -1,13 +1,6 @@
 <mat-card class="mat-elevation-z10">
   <ng-content></ng-content>
   <div class="form" *ngIf="!(widgetLoading || loading)">
-    <div *ngIf="isSignup">
-      <h2>Create Account</h2>
-
-      <button mat-stroked-button (click)="changeType('login')">
-        Returning user?
-      </button>
-    </div>
 
     <div *ngIf="isLogin">
       <h2>Sign In</h2>

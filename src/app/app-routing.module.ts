@@ -7,7 +7,7 @@ import {AdminGuard} from './shared/admin.guard';
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {
-    path: 'login', loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    path: 'auth', loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   },
   {
     path: 'stories', loadChildren: () => import('./stories/stories.module').then(m => m.StoriesModule)

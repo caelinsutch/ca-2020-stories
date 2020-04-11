@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SnackService} from '../../services/snack.service';
 import {Observable} from 'rxjs';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
@@ -14,7 +14,12 @@ import {finalize, tap} from 'rxjs/operators';
 // components that use this sub to output and create a new task loader
 // Task loader component on init upload files, components can either uploadd when the file is recieved or when the user submits form
 export class UploaderComponent {
-
+  @Output() file: EventEmitter<File> = new EventEmitter<File>();
+  @Output() uploadLink: EventEmitter<string> = new EventEmitter<string>();
+  @Input() id = 'upload';
+  @Input() handleUpload = false;
+  @Input() path: string;
+  imageBlob;
   percentage: Observable<number>;
   task: AngularFireUploadTask;
   snapshot: Observable<any>;
@@ -23,19 +28,12 @@ export class UploaderComponent {
   constructor(private snackService: SnackService, private storage: AngularFireStorage) {
   }
 
-  @Output() file: EventEmitter<File> = new EventEmitter<File>();
-  @Output() uploadLink: EventEmitter<string> = new EventEmitter<string>();
-  @Input() id = 'upload';
-  @Input() handleUpload = false;
-  @Input() path: string;
-  imageUrl;
-
   onUpload(event) {
 
     this.snackService.error('Heads up, this may take a while :)');
     const reader = new FileReader();
     const imageFile = event.target.files[0];
-    reader.onload = () => this.imageUrl = reader.result;
+    reader.onload = () => this.imageBlob = reader.result;
     reader.readAsDataURL(imageFile);
     if (!this.handleUpload) {
       this.file.emit(imageFile);
