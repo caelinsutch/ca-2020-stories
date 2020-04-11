@@ -1,12 +1,25 @@
 <div>
-  <label for="{{id}}">
+  <label for="{{id}}" *ngIf="!downloadLink">
     <mat-icon color="white" inline="true" class="p-1">cloud_upload</mat-icon>
     Upload</label>
   <input type="file" id="{{id}}" class="inputfile" (change)="onUpload($event)">
 
-  s
-  <div *ngIf="imageUrl">
+  <div *ngIf="handleUpload">
+    <div *ngIf="percentage | async as pct">
+      <mat-progress-bar [value]="pct" mode="determinate" max="100"></mat-progress-bar>
+      {{ pct | number }}%
+    </div>
+    <div *ngIf="snapshot | async as snap">
+      {{ snap.bytesTransferred }} of {{ snap.totalBytes}}
+
+      <button (click)="task.pause()" [disabled]="!isActive(snap)"  class="btn mx-1 btn-warning">Pause</button>
+      <button (click)="task.pause()"[disabled]="!isActive(snap)" class="btn mx-1 btn-danger">Cancel</button>
+      <button (click)="task.pause()" [disabled]="!(snap?.state === 'paused')" class="btn mx-1 btn-success">Resume</button>
+    </div>
+  </div>
+
+  <div *ngIf="imageBlob">
     <h3>Preview</h3>
-    <img [src]="imageUrl" alt="uploaded photo"><br>
+    <img [src]="imageBlob" alt="uploaded photo"><br>
   </div>
 </div>

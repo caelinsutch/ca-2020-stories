@@ -18,6 +18,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {StoryFilterPipe} from './StoryFilter.pipe';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const modules: Array<any> = [
   MatToolbarModule,
@@ -49,6 +50,7 @@ const components: Array<any> = [
   imports: [
     CommonModule,
     ...modules,
+    MatProgressBarModule,
   ],
   exports: [
     ...modules,
