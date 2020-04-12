@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SnackService} from '../../services/snack.service';
-import {ImageUploadService} from '../image-upload.service';
 import {Observable} from 'rxjs';
-import {AngularFireStorage} from '@angular/fire/storage';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize, tap} from 'rxjs/operators';
 
 @Component({
@@ -10,22 +9,27 @@ import {finalize, tap} from 'rxjs/operators';
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss']
 })
+// TODO this is just for the file upload, emits file
+// TODO make a new component for handling progress
+// components that use this sub to output and create a new task loader
+// Task loader component on init upload files, components can either uploadd when the file is recieved or when the user submits form
 export class UploaderComponent {
-
-  @Output() file: EventEmitter<File | string> = new EventEmitter<File|string>();
-  @Input() id = Date.now();
-  @Input() path = '';
+  @Output() file: EventEmitter<File> = new EventEmitter<File>();
+  @Output() uploadLink: EventEmitter<string> = new EventEmitter<string>();
+  @Input() id = 'upload';
   @Input() handleUpload = false;
+  @Input() path: string;
   imageBlob;
   percentage: Observable<number>;
-  task; AngularFireUploadTask;
+  task: AngularFireUploadTask;
   snapshot: Observable<any>;
-  downloadLink: string;
+  downloadUrl: string;
 
   constructor(private snackService: SnackService, private storage: AngularFireStorage) {
   }
 
   onUpload(event) {
+
     this.snackService.error('Heads up, this may take a while :)');
     const reader = new FileReader();
     const imageFile = event.target.files[0];
@@ -34,16 +38,14 @@ export class UploaderComponent {
     if (!this.handleUpload) {
       this.file.emit(imageFile);
     } else {
-      console.log("uploading");
       const ref = this.storage.ref(this.path);
       this.task = this.storage.upload(this.path, imageFile);
       this.percentage = this.task.percentageChanges();
       this.snapshot = this.task.snapshotChanges().pipe(
         tap(console.log),
         finalize(async () => {
-          this.downloadLink = await ref.getDownloadURL().toPromise();
-          console.log(this.downloadLink);
-          this.file.emit(this.downloadLink);
+          this.downloadUrl = await ref.getDownloadURL().toPromise();
+          this.uploadLink.emit(this.downloadUrl);
         })
       );
     }
