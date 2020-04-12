@@ -6,7 +6,7 @@
         <button mat-stroked-button routerLink="/auth/login">
           Returning user?
         </button>
-        <mat-vertical-stepper>
+        <mat-vertical-stepper linear>
           <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
             <mat-step label="Step 1" formGroupName="mainInformation" class="row text-center"
                       [stepControl]="mainInformation">
