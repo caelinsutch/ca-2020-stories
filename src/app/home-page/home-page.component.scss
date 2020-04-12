@@ -37,22 +37,11 @@ h1 {
 }
 
 .banner-image {
-  transform: scaleY(1.05);
-  padding-bottom: 20px;
+  position: relative;
+  width: 100%;
+  transform: scaleY(1.02);
 
 }
-
-.fit-image{
-  position: static;
-   width: 100%;
-   object-fit: fill;
-
-  @media (min-width: 992px) {
-    width: 133%;
-    transform: scaleY(1.1);
-    padding-bottom: 20px;
-  }
- }
 
 .image {
   display: block;

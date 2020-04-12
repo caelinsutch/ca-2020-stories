@@ -3,6 +3,7 @@ import {StoryService} from '../services/story.service';
 import {Subscription} from 'rxjs';
 import {Story} from '../services/story.model';
 import {SeoService} from '../shared/seo.service';
+import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home-page',
@@ -15,13 +16,22 @@ export class HomePageComponent implements OnInit, OnDestroy {
   stories: Story[];
   loading = true;
   searchText: string;
+  containerFluid = false;
+  breakPointSubscription: Subscription;
 
   constructor(
     public storyService: StoryService,
     private seoService: SeoService,
-  ) { }
+    public breakpointObserver: BreakpointObserver,
+  ) {
+  }
 
   ngOnInit(): void {
+    this.breakPointSubscription = this.breakpointObserver.observe(['(max-width: 992px)']).subscribe((state: BreakpointState) => {
+      console.log(state.matches);
+      this.containerFluid = state.matches;
+    });
+
     this.storySubscription = this.storyService.getReviewedStories().subscribe(stories => {
       this.loading = false;
       this.stories = stories;
@@ -34,6 +44,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.breakPointSubscription.unsubscribe();
     this.storySubscription.unsubscribe();
   }
 
