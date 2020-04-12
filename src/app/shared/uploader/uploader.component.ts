@@ -9,10 +9,6 @@ import {finalize, tap} from 'rxjs/operators';
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss']
 })
-// TODO this is just for the file upload, emits file
-// TODO make a new component for handling progress
-// components that use this sub to output and create a new task loader
-// Task loader component on init upload files, components can either uploadd when the file is recieved or when the user submits form
 export class UploaderComponent {
   @Output() file: EventEmitter<File> = new EventEmitter<File>();
   @Output() uploadLink: EventEmitter<string> = new EventEmitter<string>();
@@ -42,7 +38,6 @@ export class UploaderComponent {
       this.task = this.storage.upload(this.path, imageFile);
       this.percentage = this.task.percentageChanges();
       this.snapshot = this.task.snapshotChanges().pipe(
-        tap(console.log),
         finalize(async () => {
           this.downloadUrl = await ref.getDownloadURL().toPromise();
           this.uploadLink.emit(this.downloadUrl);

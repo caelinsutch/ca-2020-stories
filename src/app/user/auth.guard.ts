@@ -11,13 +11,14 @@ import {Observable} from 'rxjs';
 export class AuthGuard implements CanActivate {
 
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) { }
+  constructor(private afAuth: AngularFireAuth, private router: Router, private snackService: SnackService) { }
 
   canActivate(): Observable<boolean> {
     return this.afAuth.user.pipe(first()).pipe(map(user => {
       if (user != null) {
         return true;
       }
+      this.snackService.error('You must be logged in!')
       this.router.navigate(['/login']);
     })); // To make the observable complete after the first emission
   }

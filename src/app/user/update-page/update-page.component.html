@@ -1,1 +1,93 @@
-<p>update-page works!</p>
+<main class="container-fluid py-6 space-background">
+  <mat-card class="text-center p-3">
+    <div *ngIf="dataLoading">
+      <ngx-skeleton-loader
+        count="1"
+        [theme]="{
+          height: '50px'
+        }"
+      ></ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        count="3"
+        [theme]="{
+          height: '100px'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div *ngIf="!dataLoading">
+      <div class="text-center">
+        <h1>Welcome {{ currentUser.displayName }}!</h1>
+        <button class="gradient-button my-3 d-block mx-auto"
+                *ngIf="currentUser?.stories?.length === 0 || currentUser?.stories === undefined"
+                routerLink="/stories"
+        >Submit your story
+        </button>
+        <button class="my-2 d-block mx-auto" (click)="userService.logout()" mat-raised-button color="primary">
+          Sign Out
+        </button>
+      </div>
+
+      <hr>
+
+      <h4 class="mt-3">Update Account Information</h4>
+
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+        <mat-form-field [color]="name.valid && 'accent'" class="col-12">
+          <input
+            matInput
+            formControlName="name"
+            type="text"
+            placeholder="Name"
+            autocomplete="on"
+          />
+
+          <mat-error *ngIf="name.invalid && name.dirty">
+            You must enter a name
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field [color]="zipCode.valid && 'accent'" class="col-12">
+          <input
+            matInput
+            formControlName="zipCode"
+            placeholder="Zip Code"
+            autocomplete="off"
+            type="number"
+          />
+
+          <mat-error *ngIf="zipCode.invalid && zipCode.dirty">
+            You must enter a 5 character zipcode
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field [color]="school.valid && 'accent'" class="col-12">
+          <input
+            matInput
+            formControlName="school"
+            placeholder="School"
+            autocomplete="on"
+          />
+
+          <mat-error *ngIf="school.invalid && school.dirty">
+            You must enter a school name
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox
+          formControlName="emailOptIn"
+        >Receive Emails from Us
+        </mat-checkbox>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="mt-3 d-block mx-auto"
+          [disabled]="updateForm.invalid || loading || !updateForm.dirty"
+        >
+          Save Information
+        </button>
+      </form>
+    </div>
+  </mat-card>
+</main>

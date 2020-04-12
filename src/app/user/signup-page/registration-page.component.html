@@ -6,27 +6,13 @@
         <button mat-stroked-button routerLink="/auth/login">
           Returning user?
         </button>
-        <mat-vertical-stepper linear>
+        <mat-vertical-stepper>
           <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
             <mat-step label="Step 1" formGroupName="mainInformation" class="row text-center"
                       [stepControl]="mainInformation">
               <div class="col-12 text-center">
                 <h2>Main Information</h2>
               </div>
-              <mat-form-field [color]="email.valid && 'accent'" class="col-12">
-                <input
-                  matInput
-                  formControlName="email"
-                  type="email"
-                  placeholder="Email"
-                  autocomplete="off"
-                />
-
-                <mat-error *ngIf="email.valid && email.dirty">
-                  You must enter a valid email address
-                </mat-error>
-              </mat-form-field>
-
               <mat-form-field [color]="name.valid && 'accent'" class="col-12">
                 <input
                   matInput
@@ -38,6 +24,20 @@
 
                 <mat-error *ngIf="name.invalid && name.dirty">
                   You must enter a name
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field [color]="email.valid && 'accent'" class="col-12">
+                <input
+                  matInput
+                  formControlName="email"
+                  type="email"
+                  placeholder="Email"
+                  autocomplete="off"
+                />
+
+                <mat-error *ngIf="email.valid && email.dirty">
+                  You must enter a valid email address
                 </mat-error>
               </mat-form-field>
 
@@ -124,7 +124,7 @@
             <mat-step label="Step 3" class="row" [stepControl]="verificationImage">
               <h2 class="col-12 text-center">Upload Verification Image</h2>
               <div class="col-12 mt-3 text-center">
-                <app-uploader [handleUpload]="true" (file)="setVerificationImage($event)"
+                <app-uploader [handleUpload]="true" [id]="'verification'" (uploadLink)="setVerificationImage($event)"
                               [path]="'verification/' + name"></app-uploader>
                 <button mat-raised-button color="primary" matStepperNext class="mx-auto"
                         [disabled]="verificationImage.invalid">Next
@@ -135,7 +135,7 @@
             <mat-step label="Step 4" class="row" [stepControl]="profileImage">
               <h2 class="col-12 text-center">Upload Profile Image</h2>
               <div class="col-12 mt-3 text-center">
-                <app-uploader [handleUpload]="true" (file)="setProfileImage($event)"
+                <app-uploader [handleUpload]="true" [id]="'profile'" (uploadLink)="setProfileImage($event)"
                               [path]="'profile/' + name"></app-uploader>
                 <button mat-raised-button color="primary" matStepperNext class="mx-auto"
                         [disabled]="profileImage.invalid">Next
@@ -153,6 +153,7 @@
                     color="primary"
                     type="submit"
                     [disabled]="registrationForm.invalid || !passwordDoesMatch || loading"
+                    (click)="onSubmit()"
                   >
                     Submit
                   </button>
