@@ -1,5 +1,4 @@
 import * as functions from 'firebase-functions';
-import {User} from '../../src/app/user/user.model';
 
 const admin = require('firebase-admin');
 
@@ -8,6 +7,25 @@ admin.initializeApp(functions.config().firebase);
 const auth = admin.auth();
 
 const db = admin.firestore();
+
+
+interface User {
+  zipCode?: string;
+  verificationStatus?: 'verified' | 'flagged' | 'waiting verification' | 'rejected';
+  verificationImage?: string;
+  school?: string;
+  stories?: string[]; // List of names of stories
+  latitude?: string[];
+  longitude?: string[];
+  role?: string;
+  uid?: string;
+  displayName?: string;
+  profileImage?: string;
+  email?: string;
+  permissions?: {
+    emailOptIn?: boolean;
+  };
+}
 
 /**
  * When a zipcode is added or changed to a user document, add the lat and long coordinates of the zipcode
@@ -34,9 +52,11 @@ exports.zipCodeToLatLng = functions.firestore
   })
 
 /**
- * When a users displayName is updated in the userid document, update the fireauth doc as well
+ * Handle displayName updates
+ * Changes display name in FireAuth
+ * Updates users stories with new display name
  */
-exports.changeAuthDisplayName = functions.firestore
+exports.displayNameUpdated = functions.firestore
   .document('users/{userId}')
   .onWrite(change => {
     const newData: User = change.after.data() as User;
@@ -46,7 +66,16 @@ exports.changeAuthDisplayName = functions.firestore
     if (newData.uid != null && newData.displayName != null) {
       if (newData.displayName !== oldData.displayName) {
         auth.updateUser(newData.uid, {displayName: newData.displayName})
+        db.collection('stories')
+          .where('uid', '==', newData.displayName)
+          .get().then((res: any) => {
+            const batch = db.batch();
+            res.docs.forEach((doc: any) => {
+              const docRef = db.collection('stories').doc(doc.id);
+              batch.update(docRef, {author: newData.displayName});
+            })
+          batch.commit();
+        })
       }
     }
   })
-
