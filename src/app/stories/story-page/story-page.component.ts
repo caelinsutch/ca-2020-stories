@@ -35,6 +35,7 @@ export class StoryPageComponent implements OnInit, OnDestroy {
     this.serviceSub = this.storyService.getStoryById(this.id).subscribe(story => {
       this.story = story;
       this.userSub = this.userService.getUserById(this.story.uid).subscribe(user => {
+        console.log(user);
         this.author = user;
         this.seoService.generateTags({
           title: this.story.title,

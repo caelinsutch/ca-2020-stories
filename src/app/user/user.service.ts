@@ -47,7 +47,7 @@ export class UserService {
   }
 
   getUserById(id: string): Observable<User> {
-    return this.db.collection(environment.database.users).doc<User>(id).get() as Observable<User>;
+    return this.db.collection(environment.database.users).doc<User>(id).valueChanges() as Observable<User>;
   }
 
   getCurrentUser(): Observable<User> {

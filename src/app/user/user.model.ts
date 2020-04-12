@@ -1,17 +1,17 @@
 export class User {
-  zipCode?: string;
-  verificationStatus?: 'verified' | 'flagged' | 'waiting verification' | 'rejected';
-  verificationImage?: string;
-  school?: string;
-  stories?: string[]; // List of names of stories
-  latitude?: string[];
-  longitude?: string[];
-  role?: string;
-  uid?: string;
-  displayName?: string;
-  profileImage?: string;
-  email?: string;
-  permissions?: {
+  public zipCode?: string;
+  public verificationStatus?: 'verified' | 'flagged' | 'waiting verification' | 'rejected';
+  public verificationImage?: string;
+  public school?: string;
+  public stories?: string[]; // List of names of stories
+  public latitude?: string[];
+  public longitude?: string[];
+  public role?: string;
+  public uid?: string;
+  public displayName?: string;
+  public profileImage?: string;
+  public email?: string;
+  public permissions?: {
     emailOptIn?: boolean;
   };
 }
