@@ -16,9 +16,8 @@ jobs:
     - uses: actions/setup-node@master
       with:
         node-version: '10.x'
-    - run: cd functions
-    - run: npm install
-    - run: npm run build:prod
+    - run: cd functions && npm i
+    - run: cd functions && npm run build
     - uses: w9jds/firebase-action@master
       with:
         args: deploy --only functions
