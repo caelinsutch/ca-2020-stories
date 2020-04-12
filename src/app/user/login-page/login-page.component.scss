@@ -1,16 +1,5 @@
-button {
-  img {
-    width: 1.25em;
-  }
-}
-
-
-:host {
-  text-align: center;
-}
-
-.logout {
-  padding-top: 5em;
+h2 {
+  font-weight: bold;
 }
 
 mat-card {
@@ -19,4 +8,30 @@ mat-card {
   width: 100%;
   margin: 0 auto;
   border-radius: 40px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.server-error {
+  margin: 8px 0;;
+}
+
+
+input {
+  height: 2em;
+
+  div.mat-form-field-infix {
+    padding: .3em 0;
+
+    input.mat-input-element {
+      vertical-align: top;
+    }
+  }
+}
+
+div.mat-form-field-wrapper {
+  padding-bottom: 1.15em;
 }

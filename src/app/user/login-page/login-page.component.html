@@ -1,25 +1,54 @@
 <main class="container-fluid py-6 space-background">
-  <div class="row">
-    <div class="col-12 text-center">
-      <div>
-        <app-email-login></app-email-login>
-      </div>
-
-
-      <div *ngIf="afAuth.authState | async as user" class="logout">
-        <mat-card class="mat-elevation-z10">
-          <h1 class="font-weight-bold">Welcome {{ user.displayName}}!</h1>
-          <p>
-            Logged in as <strong>{{ user.email }}</strong>
-          </p>
-
-          <h3>Account Status</h3>
-          <p>Your account is {{(userService.getCurrentUser() | async)?.verificationStatus }} </p>
-          <button mat-raised-button color="primary" (click)="userService.logout()">Sign Out</button>
-        </mat-card>
-      </div>
+  <mat-card class="text-center p-3">
+    <div class="text-center">
+      <h2>Sign In</h2>
+      <button size="small" mat-stroked-button routerLink="/auth/signup">
+        New user?
+      </button>
     </div>
-  </div>
 
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field [color]="email.valid && 'accent'">
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          placeholder="Email"
+          autocomplete="off"
+        />
 
+        <mat-error *ngIf="email.invalid && email.dirty">
+          You must enter a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field [color]="password.valid && 'accent'">
+        <input
+          matInput
+          formControlName="password"
+          type="password"
+          placeholder="Password"
+          autocomplete="off"
+        />
+
+        <mat-error *ngIf="password.invalid && password.dirty">
+          Password cannot be blank
+        </mat-error>
+      </mat-form-field>
+
+      <h5 routerLink="auth/reset-password">Forgot Password?</h5>
+
+      <mat-error class="server-error">{{ serverMessage }}</mat-error>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="mt-2"
+        [disabled]="form.invalid || loading"
+      >
+        Submit
+      </button>
+    </form>
+  </mat-card>
 </main>

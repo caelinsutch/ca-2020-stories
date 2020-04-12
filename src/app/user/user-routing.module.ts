@@ -1,12 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginPageComponent} from './login-page/login-page.component';
-import {RegistrationPageComponent} from './signup-page/registration-page.component';
+import {ResetPasswordPageComponent} from './reset-password-page/reset-password-page.component';
+// import {RegistrationPageComponent} from './signup-page/registration-page.component';
 
 
 const routes: Routes = [
-  {path: '', component: LoginPageComponent},
-  {path: 'signup', component: RegistrationPageComponent}
+  {path: 'login', component: LoginPageComponent},
+  // {path: 'signup', component: RegistrationPageComponent},
+  {path: 'reset-password', component: ResetPasswordPageComponent},
+  {path: '', redirectTo: 'login'},
 ];
 
 @NgModule({

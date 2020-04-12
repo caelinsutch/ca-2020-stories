@@ -80,4 +80,8 @@ export class UserService {
   getAllUser(): Observable<User[]> {
     return this.db.collection<User>('users').valueChanges({idField: 'uid'});
   }
+
+  async resetPassword(email: string) {
+    return this.afAuth.sendPasswordResetEmail(email);
+  }
 }
