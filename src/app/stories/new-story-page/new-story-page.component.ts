@@ -106,7 +106,6 @@ export class NewStoryPageComponent implements OnInit, OnDestroy{
         }
       } catch (err) {
         this.loading = false;
-        console.log(err);
       }
 
     } else {

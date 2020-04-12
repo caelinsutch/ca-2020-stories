@@ -37,9 +37,10 @@
             </mat-form-field>
 
             <h3>Preview of Markdown</h3>
-            <markdown [data]="story.value" class="text-left">
+            <div class="markdown-preview">
+              <markdown [data]="story.value" class="text-left"></markdown>
+            </div>
 
-            </markdown>
 
             <div class="p-3">
               <h4>Upload a photo of yourself or something relating to your story!</h4>

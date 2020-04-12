@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {CanActivate, Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {SnackService} from '../services/snack.service';
-import {first, map, tap} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -18,8 +18,8 @@ export class AuthGuard implements CanActivate {
       if (user != null) {
         return true;
       }
-      this.snackService.error('You must be logged in!')
-      this.router.navigate(['/login']);
+      this.snackService.error('You must be logged in!');
+      this.router.navigate(['/auth/login']);
     })); // To make the observable complete after the first emission
   }
 }

@@ -21,7 +21,6 @@ export class StoryFilterPipe implements PipeTransform {
   search(entries: any[], query: string) {
 
     query = query.toLowerCase();
-    console.log('Query', query);
 
     return entries.filter(obj => {
       const keys: string[] = ['title', 'author'];

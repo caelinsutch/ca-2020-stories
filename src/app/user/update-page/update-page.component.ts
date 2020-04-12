@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import {SnackService} from '../../services/snack.service';
@@ -47,7 +47,6 @@ export class UpdatePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().pipe(first()).subscribe(user => {
-      console.log(user);
       this.dataLoading = false;
       this.currentUser = user;
       this.updateForm = this.fb.group({

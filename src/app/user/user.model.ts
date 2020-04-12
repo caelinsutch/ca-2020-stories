@@ -1,6 +1,6 @@
 export class User {
   zipCode?: string;
-  verificationStatus?: string;
+  verificationStatus?: 'verified' | 'flagged' | 'waiting verification' | 'rejected';
   verificationImage?: string;
   school?: string;
   stories?: string[]; // List of names of stories

@@ -28,7 +28,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.breakPointSubscription = this.breakpointObserver.observe(['(max-width: 992px)']).subscribe((state: BreakpointState) => {
-      console.log(state.matches);
+      // console.log(state.matches);
       this.containerFluid = state.matches;
     });
 

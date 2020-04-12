@@ -1,6 +1,6 @@
 mat-card {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
   border-radius: 40px;
@@ -21,11 +21,20 @@ input {
     }
   }
 }
-div.mat-form-field-wrapper{
+
+div.mat-form-field-wrapper {
   padding-bottom: 1.15em;
 }
 
 textarea {
-  min-height: 100px;
+  height: 300px;
+}
+
+.markdown-preview {
+  height: 300px;
+  overflow-y: scroll;
+  border: solid purple;
+  padding: 12px;
+  border-radius: 8px;
 }
 
