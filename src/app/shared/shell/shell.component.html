@@ -8,7 +8,7 @@
 
       <a mat-list-item routerLink="/" (click)="drawer.close()">🏠 Home</a>
       <a mat-list-item routerLink="/auth" (click)="drawer.close()" *ngIf="!(afAuth.authState | async)">🔑 Login</a>
-      <a mat-button routerLink="/auth/update" (click)="drawer.close()" *ngIf="afAuth.authState | async as user">
+      <a mat-button routerLink="/auth/update" (click)="drawer.close()" *ngIf="afAuth.authState | async">
         😀 {{ user.displayName }}
       </a>
       <a mat-button routerLink="/stories" (click)="drawer.close()" *ngIf="(afAuth.authState | async) && !hasStories">
@@ -37,7 +37,7 @@
         <div *ngIf="!(isHandset$ | async)" class="float-left">
 
           <button mat-button routerLink="/auth" *ngIf="!(afAuth.authState | async)" style="margin-top: 2px;">🔑 Login</button>
-          <button mat-button routerLink="/auth/update" *ngIf="afAuth.authState | async as user">
+          <button mat-button routerLink="/auth/update" *ngIf="afAuth.authState | async">
             😀 {{ user.displayName }}
           </button>
           <button mat-button routerLink="/stories" *ngIf="(afAuth.authState | async) && !hasStories">

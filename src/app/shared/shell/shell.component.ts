@@ -4,6 +4,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map, shareReplay} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from '../../user/user.service';
+import {User} from '../../user/user.model';
 
 @Component({
   selector: 'app-shell',
@@ -19,9 +20,11 @@ export class ShellComponent implements OnInit, OnDestroy {
     );
   sub: Subscription;
   hasStories = false;
+  user: User;
 
   ngOnInit(): void {
     this.sub = this.userService.getCurrentUser().subscribe(user => {
+      this.user = user;
       if (user?.stories) {
         this.hasStories = (user.stories.length !== 0);
       } else {
