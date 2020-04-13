@@ -1,6 +1,7 @@
 # Ca2020stories
 
-![CI](https://github.com/caelinsutch/ca-2020-stories/workflows/CI/badge.svg)
+![Hosting](https://github.com/caelinsutch/ca-2020-stories/workflows/Hosting/badge.svg)
+![Functions](https://github.com/caelinsutch/ca-2020-stories/workflows/Functions/badge.svg)
 
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/Naereen/)
 [![ForTheBadge uses-badges](http://ForTheBadge.com/images/badges/uses-badges.svg)](http://ForTheBadge.com)
