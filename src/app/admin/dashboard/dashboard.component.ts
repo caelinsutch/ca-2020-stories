@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from '../../user/user.service';
 import {StoryService} from '../../services/story.service';
 import {Subscription} from 'rxjs';
@@ -19,16 +19,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   storySub: Subscription;
   users: User[];
   stories: Story[];
-  dataSource = new MatTableDataSource<User>();
+  userDataSource = new MatTableDataSource<User>();
+  storyDataSource = new MatTableDataSource<Story>();
 
-  displayedColumns = ['displayName', 'school', 'verified', 'email', 'verificationImage', 'verify'];
+  displayedUserColumns = ['displayName', 'school', 'zipcode', 'email', 'id', 'verified', 'verificationImage', 'verify'];
+  displayedStoryColumns = ['title', 'reviewed', 'author', 'image', 'id', 'story'];
 
   constructor(
     private userService: UserService,
     private storyService: StoryService,
     private dialog: MatDialog,
     private snackService: SnackService,
-    private changeDetectorRef: ChangeDetectorRef
   ) {
   }
 
@@ -55,12 +56,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSub = this.userService.getAllUser().subscribe(users => {
       this.users = users;
-      this.dataSource.connect().next(this.users);
-      this.changeDetectorRef.detectChanges();
+      this.userDataSource.connect().next(this.users);
     });
     this.storySub = this.storyService.getAllStories().subscribe(stories => {
       this.stories = stories;
-      this.changeDetectorRef.detectChanges();
+      this.storyDataSource.connect().next(this.stories);
     });
   }
 

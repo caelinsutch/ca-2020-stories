@@ -125,7 +125,7 @@
               <h2 class="col-12 text-center">Upload Verification Image</h2>
               <div class="col-12 mt-3 text-center">
                 <app-uploader [handleUpload]="true" [id]="'verification'" (uploadLink)="setVerificationImage($event)"
-                              [path]="'verification/' + name"></app-uploader>
+                              [path]="'verification/' + name.value"></app-uploader>
                 <button mat-raised-button color="primary" matStepperNext class="mx-auto"
                         [disabled]="verificationImage.invalid">Next
                 </button>
@@ -136,7 +136,7 @@
               <h2 class="col-12 text-center">Upload Profile Image</h2>
               <div class="col-12 mt-3 text-center">
                 <app-uploader [handleUpload]="true" [id]="'profile'" (uploadLink)="setProfileImage($event)"
-                              [path]="'profile/' + name"></app-uploader>
+                              [path]="'profile/' + name.value"></app-uploader>
                 <button mat-raised-button color="primary" matStepperNext class="mx-auto"
                         [disabled]="profileImage.invalid">Next
                 </button>
