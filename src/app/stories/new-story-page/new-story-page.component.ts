@@ -97,7 +97,7 @@ export class NewStoryPageComponent implements OnInit, OnDestroy{
                 this.loading = false;
               } else {
                 this.snackBar.open('Thank you for uploading your story! Our team will review it and let you when it\'s uploaded!');
-                this.userService.updateUser({stories: [res.id]}).then(r => {
+                this.userService.updateCurrentUser({stories: [res.id]}).then(r => {
                   this.router.navigateByUrl('/');
                 });
               }

@@ -21,10 +21,12 @@ export class ShellComponent implements OnInit, OnDestroy {
   sub: Subscription;
   hasStories = false;
   user: User;
+  isAdmin = false;
 
   ngOnInit(): void {
     this.sub = this.userService.getCurrentUser().subscribe(user => {
       this.user = user;
+      this.isAdmin = (user?.role === 'admin');
       if (user?.stories) {
         this.hasStories = (user.stories.length !== 0);
       } else {

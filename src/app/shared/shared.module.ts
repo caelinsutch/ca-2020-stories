@@ -19,6 +19,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {StoryFilterPipe} from './StoryFilter.pipe';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {NotFoundPageComponent} from './not-found-page/not-found-page.component';
 
 const modules: Array<any> = [
   MatToolbarModule,
@@ -46,7 +47,7 @@ const components: Array<any> = [
 ];
 
 @NgModule({
-  declarations: [...components, ],
+  declarations: [...components, NotFoundPageComponent,],
   imports: [
     CommonModule,
     ...modules,

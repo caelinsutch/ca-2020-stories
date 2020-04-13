@@ -66,7 +66,7 @@ export class UpdatePageComponent implements OnInit {
     // const profileUrl = this.profileImage.value;
     const emailOptIn = this.emailOptIn.value;
     try {
-      this.userService.updateUser({displayName: name, zipCode, school, permissions: {emailOptIn}}).then(() => {
+      this.userService.updateCurrentUser({displayName: name, zipCode, school, permissions: {emailOptIn}}).then(() => {
         this.snack.error('Updated Account!');
         this.loading = false;
       });

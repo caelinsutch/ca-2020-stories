@@ -62,9 +62,13 @@ export class UserService {
     );
   }
 
-  async updateUser(newUser: User): Promise<any> {
+  async updateCurrentUser(newUser: User): Promise<any> {
     const currentUser = await this.afAuth.currentUser;
     return this.db.collection(environment.database.users).doc(currentUser.uid).update(newUser);
+  }
+
+  async updateUserById(uid: string, newUser: User): Promise<any> {
+    return this.db.collection(environment.database.users).doc(uid).update(newUser);
   }
 
   async loginUser(email, password) {
