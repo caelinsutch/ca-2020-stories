@@ -10,6 +10,7 @@ h4 {
 mat-card {
   height: 340px;
   max-width: none;
+  overflow: scroll !important;
 }
 
 .double-height {
